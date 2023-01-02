@@ -1,0 +1,38 @@
+/* BlogStyle One Css */
+
+.BlogStyleOneContainer img{
+    width: 130px;
+    height: 80px;
+    border-radius: 15px;
+}
+.BlogStyleOneText h5{
+    font-weight: bold;
+    font-size: 17px;
+}
+/* BlogStyle Two Css */
+
+.authorImage img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.authorImage p{
+    margin: 0;
+    margin: 0 8px;
+}
+
+.blogBigImage{
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* BlogStyle Three Css */
+.blogBigImageTwo{
+    width:80%;
+    height: 175px;
+    border-radius: 20px;
+}
+.blogRightSide h1{
+    font-size: 22px;
+    font-weight: bold;
+}

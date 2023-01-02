@@ -1,0 +1,140 @@
+
+/* Dropdown Style */
+.dropdownBox{
+    box-shadow: 2px 3px 14px -7px;
+    border: 0px;
+    border-radius: 3px;
+}
+.dropdownBox li {
+    border-bottom: 1px solid #80808024;
+    transition: all .2s ease-in-out;
+}
+.dropdownBox li:last-child{
+    border-bottom: 0px solid #80808024;
+}
+
+/* Dropdown hover */
+
+.dropdownBox li:hover{
+    margin-left: 4px;
+}
+.dropdownBox li a:hover{
+    color: #fe4f70;
+    background-color: transparent!important;
+}
+
+/* Search Pop up */
+.searchPopup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    z-index: 100000;
+    opacity: 1;
+    visibility: visible;
+    transition: all .2s ease-in-out;
+}
+.searchPosition{
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    width: 100%;
+}
+.searchPopupClose{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.searchPopupHide{
+    position: absolute;
+    top: -100%;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.searchContainer{
+    width: 50%;
+}
+.searchContainer h1{
+    text-align: center;
+    font-weight: bold;
+}
+.searchInput{
+    text-align: center;
+}
+.searchInput input {
+    width: 70%;
+    height: 3rem;
+    border-radius: 30px;
+    padding: 0px 20px;
+}
+.searchInput input:focus{
+    border: 1px solid #fe4f70 !important;
+}.searchInput input:focus-visible{
+    border: none !important;
+}
+
+/* Side Navbar */
+
+.showSideNav{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.548);
+    opacity: 1;
+    visibility: visible;
+    transition: all .2s ease-in-out;
+}
+.showSideNavHide{
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+.sideNavRightSide{
+    padding: .5% 2%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20%;
+    height: 100%;
+    background-color: white;
+    box-shadow: 2px 3px 14px -7px;
+}
+
+.crossNav{
+    position: absolute;
+    right: 10%;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.sideNavListContainer{
+    position: absolute;
+    top: 15%;
+    width: 100%;
+}
+.sideNavLists{
+    width: 70%;
+}
+.sideNavLists li{
+    padding: 10px 0px;
+    border-bottom: 1px solid #80808024;
+}
+.sideNavLists li a{
+    font-size: 1rem;
+    transition: all .2s ease-in-out;
+}
+.sideNavLists li a:hover{
+    color: #fe4f70;
+    margin-left: 3px;
+}
+
+
+
+

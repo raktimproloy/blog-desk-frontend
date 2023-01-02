@@ -1,0 +1,23 @@
+/* Popular Blog Style */
+.popularBlogContainer{
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 10px;
+}
+.popularBlogContainer:last-child{
+    border-bottom: none;
+    margin-bottom: 0px;
+}
+.popularBlogTexts h5{
+    font-size: 17px;
+    font-weight: bold;
+    margin: 0;
+} 
+.popularBlogTexts p{
+    font-size: 15px;
+    margin: 0;
+}
+.popularBlogImage{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}

@@ -1,0 +1,55 @@
+.leftSectionContainer{
+    width: 65%;
+}
+
+.standardBlogRightPart{
+    width: 50%;
+}
+
+
+
+
+
+/* Standard Blog Style Left Part */
+.standardBlogLeftPart{
+    width: 50%;
+}
+
+
+/* Main Right Section */
+.rightSectionContainer{
+    width: 30%;
+}
+
+
+
+
+.title{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.ownerSectionTitle{
+    font-weight: bold;
+}
+.authorImage{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}
+.commentOwnerImage{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.commentOwnerName{
+    font-weight: bold;
+}
+.commentTitle{
+    font-weight: bold;
+}
+.commentCommentBox{
+    border-radius: 20px;
+}
+.commentButton{
+    cursor: pointer;
+}

@@ -1,0 +1,30 @@
+.containerPosition{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerMain{
+    padding: 2%;
+    background-color: rgb(255, 228, 228);
+}
+.submitBtnContainer{
+    text-align: center;
+}
+.submitBtn{
+    padding: 3% 10%!important;
+}
+.changePath{
+    transition: all .2s ease-in-out;
+}
+.changePath:hover{
+    color: #fe4f70;
+}
+.goHome{
+    position: fixed;
+    margin: 40px 0px 0px 20px;
+}
+.checkedColor{
+    border-color: red !important;
+}

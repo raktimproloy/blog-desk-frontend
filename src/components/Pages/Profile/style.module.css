@@ -1,0 +1,42 @@
+.profileIcons{
+    width: 30%;
+}
+.profileIcons li{
+    font-size: 22px;
+}
+.profileDetailsContainer{
+    width: 100%;
+    margin-top: 5%;
+    padding: 4%;
+    background-color: rgb(255, 228, 228);
+    position: relative;
+}
+.profileNameImage img{
+    position: absolute;
+    top: -20%;
+    left: 5%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 5%;
+}
+
+/* Profile Blog Style */
+.blogBigImageTwo{
+    width:80%;
+    height: 175px;
+    border-radius: 20px;
+}
+.blogRightSide h1{
+    font-size: 22px;
+    font-weight: bold;
+}
+.authorImage img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.authorImage p{
+    margin: 0;
+    margin: 0 8px;
+}
