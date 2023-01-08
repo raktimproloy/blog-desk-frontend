@@ -9,11 +9,21 @@ import Protected from "./Protected/Protected";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./common/css/style.css"
 import {
-  Route, Routes
+  Route, Routes, useLocation
 } from "react-router-dom";
 import AuthVerification from "./commonFunc/AuthVerification";
+import { useEffect, useState } from "react";
 
 function App() {
+  const location = useLocation()
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  useEffect(() => {
+    if(AuthVerification().isExp){
+      setIsLoggedIn(true)
+    }else{
+      setIsLoggedIn(false)
+    }
+  }, [location])
   return (
     <div className="App">
       <Routes>
@@ -23,7 +33,7 @@ function App() {
         <Route path="category" element={ <Category/> } />
         <Route path="blog" element={ <Blog/> } />
         <Route path="post" element={
-          <Protected isLoggedIn={AuthVerification().isExp}>
+          <Protected isLoggedIn={isLoggedIn}>
             <Post/>
           </Protected>  } />
         <Route path="Profile" element={ <Profile/> } />

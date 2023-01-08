@@ -17,6 +17,7 @@ function Navbar () {
     const logoutBtn = () => {
         localStorage.clear()
     }
+    console.log("nav", isExp);
 
     return(
         <>

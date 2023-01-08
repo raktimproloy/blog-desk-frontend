@@ -1,0 +1,14 @@
+.themeContainer{
+    padding: 10px;
+    cursor: pointer;
+}
+.themeContainer img{
+    width: 150px;
+}
+.themeContainer p{
+    font-weight: bold;
+    text-align: center;
+}
+.selectTheme{
+    border: 1px solid #fe4f70 !important;
+}
