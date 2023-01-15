@@ -1,34 +1,39 @@
 import React from "react";
 
 function ThemeInputsOne ({themeOnePostItem, setThemeOnePostItem}) {
+    const photoChange = (e) => {
+        setThemeOnePostItem({...themeOnePostItem, [e.target.name]: e.target.files[0]})
+    }
     return(
         <>
             <div className="py-3">
                 <div>
-                    <p>First Image:</p>
-                    <input type="file" placeholder="Upload first image" className="fileStyle" name="file" onChange={(e) => {setThemeOnePostItem({...themeOnePostItem, file: e.target.files[0].name})}} />
+                    <p>First Image</p>
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageOne" onChange={photoChange} />
                 </div>
                 <div>
                     <p>First Description:</p>
                     <textarea cols="55" rows="5" className="textareaStyle" name="firstDescription" onChange={(e) => {setThemeOnePostItem({...themeOnePostItem, firstDescription: e.target.value})}} ></textarea>
                 </div>
             </div>
-            <div className="py-3">
+            <div>
                 <div>
-                    <p>Second Image:</p>
-                    <input type="file" placeholder="Upload Second image" className="fileStyle" name="secondImage" onChange={(e) => {setThemeOnePostItem({...themeOnePostItem, secondImage: e.target.value})}} />
+                    <p>Second Image</p>
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageTwo" onChange={photoChange} />
                 </div>
                 <div>
                     <p>Second Description:</p>
                     <textarea cols="55" rows="5" placeholder="First Description" className="textareaStyle" name="secondDescription" onChange={(e) => {setThemeOnePostItem({...themeOnePostItem, secondDescription: e.target.value})}} ></textarea>
                 </div>
             </div>
-            <div className="py-3">
+            <div>
                 <div>
-                    <p>Third Image:</p>
-                    <input type="file" placeholder="Upload Third image" className="fileStyle" name="thirdImage" onChange={(e) => {setThemeOnePostItem({...themeOnePostItem, thirdImage: e.target.value})}} />
-                    <p>Fourth Image:</p>
-                    <input type="file" placeholder="Upload Fourth image" className="fileStyle" name="fourthImage" onChange={(e) => {setThemeOnePostItem({...themeOnePostItem, fourthImage: e.target.value})}} />
+                    <p>Third Image</p>
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageThree" onChange={photoChange} />
+                </div>
+                <div>
+                    <p>Fourth Image</p>
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageFour" onChange={photoChange} />
                 </div>
                 <div>
                     <p>Third Description:</p>

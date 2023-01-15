@@ -5,25 +5,15 @@ import Category from "./components/Pages/Category/Category"
 import Blog from "./components/Pages/Blog/Blog"
 import Post from "./components/Pages/Post/Post";
 import Profile from "./components/Pages/Profile/Profile";
-import Protected from "./Protected/Protected";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./common/css/style.css"
 import {
-  Route, Routes, useLocation
+  Route, Routes
 } from "react-router-dom";
-import AuthVerification from "./commonFunc/AuthVerification";
-import { useEffect, useState } from "react";
+
+import ProtectedRoutes from "./Protected/ProtectedRoutes"
 
 function App() {
-  const location = useLocation()
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-  useEffect(() => {
-    if(AuthVerification().isExp){
-      setIsLoggedIn(true)
-    }else{
-      setIsLoggedIn(false)
-    }
-  }, [location])
   return (
     <div className="App">
       <Routes>
@@ -32,10 +22,13 @@ function App() {
         <Route path="login" element={ <Login/> } />
         <Route path="category" element={ <Category/> } />
         <Route path="blog" element={ <Blog/> } />
-        <Route path="post" element={
+        {/* <Route path="post" element={
           <Protected isLoggedIn={isLoggedIn}>
             <Post/>
-          </Protected>  } />
+          </Protected>  } /> */}
+          <Route element={<ProtectedRoutes/>}>
+            <Route path="/post" element={<Post/>} />
+          </Route>
         <Route path="Profile" element={ <Profile/> } />
       </Routes>
     </div>

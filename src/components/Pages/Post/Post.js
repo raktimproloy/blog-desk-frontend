@@ -12,12 +12,12 @@ function Post () {
     const [postResponse, setPostResponse] = useState({})
     const [selectTheme, setSelectTheme] = useState("themeOne")
     const [themeOnePostItem, setThemeOnePostItem] = useState({
-        file: "",
+        BlogImageOne: "",
+        BlogImageTwo: "",
+        BlogImageThree: "",
+        BlogImageFour: "",
         firstDescription: "",
-        secondImage: "",
         secondDescription: "",
-        thirdImage: "",
-        fourthImage: "",
         thirdDescription: "",
     })
     const [blogItem, setBlogItem] = useState({
@@ -31,30 +31,25 @@ function Post () {
 
     const postBlogBtn = async (e) => {
         e.preventDefault()
-        const allItems = {
-            ...blogItem,
-            ...themeOnePostItem
-        }
-        console.log(allItems);
+        
         const formData = new FormData()
+        formData.append("BlogImageOne", themeOnePostItem.BlogImageOne)
+        formData.append("BlogImageTwo", themeOnePostItem.BlogImageTwo)
+        formData.append("BlogImageThree", themeOnePostItem.BlogImageThree)
+        formData.append("BlogImageFour", themeOnePostItem.BlogImageFour)
         formData.append("theme", blogItem.theme)
         formData.append("title", blogItem.title)
-        formData.append("file", themeOnePostItem.file)
         formData.append("firstDescription", themeOnePostItem.firstDescription)
-        formData.append("secondImage", themeOnePostItem.secondImage)
+        formData.append("secondDescription", themeOnePostItem.secondDescription)
+        formData.append("thirdDescription", themeOnePostItem.thirdDescription)
 
-        console.log(formData);
-        axios.post(databaseApi + "/blog/post", allItems)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-        // const data = await fetch(databaseApi + "/blog/post", {
-        //     method: "POST",
-        //     body: JSON.stringify(allItems)
-        // }).then(res => res.json())
-        // .then(data => {
-        //     setPostResponse(data)
-        // })
-        // .catch(err => console.log(err.message))
+        axios.post(`${databaseApi}/blog/post`, formData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
     return(
         <>
@@ -96,7 +91,7 @@ function Post () {
                                 <ThemeInputsOne themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>
                             </div>
                             <div className="text-center mt-3">
-                                <input type="submit" className="bgColorLeftToRight py-3" value="Post Blog" />
+                                <input className="bgColorLeftToRight py-3" type="submit" value="Post Blog" />
                             </div>
                         </form>
                     </div>
