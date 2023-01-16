@@ -69,7 +69,7 @@ function Navbar () {
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item mx-2">
                                 { 
-                                    AuthVerification().isExp ? <Link className="nav-link" to="/profile"><AiOutlineUser/></Link> : ""
+                                    AuthVerification().isExp ? <Link className="nav-link" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
                                 }
                                 
                             </li>
