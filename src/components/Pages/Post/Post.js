@@ -6,11 +6,13 @@ import postStyle from "./style.module.css"
 import ThemeInputsOne from "./ThemeInputs/ThemeInputsOne/ThemeInputsOne";
 import ThemeOneImage from "../../../images/themeImage/themeOne.png"
 import ContextApi from "../../../ContextApi/ContextApi";
+import AuthVerification from "../../../commonFunc/AuthVerification";
 
 function Post () {
     const {databaseApi} = useContext(ContextApi)
     const [postResponse, setPostResponse] = useState({})
     const [selectTheme, setSelectTheme] = useState("themeOne")
+    const {isExp, userId, fullName, email} = AuthVerification();
     const [themeOnePostItem, setThemeOnePostItem] = useState({
         BlogImageOne: "",
         BlogImageTwo: "",
@@ -32,7 +34,9 @@ function Post () {
     const postBlogBtn = async (e) => {
         e.preventDefault()
         
+        console.log("userId",userId);
         const formData = new FormData()
+        formData.append("userId", userId)
         formData.append("BlogImageOne", themeOnePostItem.BlogImageOne)
         formData.append("BlogImageTwo", themeOnePostItem.BlogImageTwo)
         formData.append("BlogImageThree", themeOnePostItem.BlogImageThree)

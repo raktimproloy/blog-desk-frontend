@@ -23,9 +23,12 @@
 
 /* Profile Blog Style */
 .blogBigImageTwo{
-    width:80%;
+    width:35%;
     height: 175px;
     border-radius: 20px;
+}
+.blogRightSide{
+    width: 65%;
 }
 .blogRightSide h1{
     font-size: 22px;

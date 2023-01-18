@@ -51,12 +51,10 @@ function Login () {
                         <div className="mb-3">
                             <label className="form-label">Email address</label>
                             <input type="email" className="form-control" autoComplete="off" onChange={(e) => {setUserLoginData({...userLoginData, email: e.target.value})}} />
-                            <div className="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Password</label>
                             <input type="password" className="form-control" autoComplete="off" onChange={(e) => {setUserLoginData({...userLoginData, password: e.target.value})}} />
-                            <div className="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         <div className={`${LoginStyle.submitBtnContainer}`}>
                             <button type="submit" className={`btn bgColorLeftToRight ${LoginStyle.submitBtn}`} onClick={loginBtn} >Submit</button>

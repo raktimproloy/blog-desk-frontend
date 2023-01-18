@@ -6,7 +6,7 @@ import axios from "axios"
 
 function Signup() {
     const {databaseApi} = useContext(ContextApi);
-    const [backendRes, setBackendRes] = useState({})
+    const [backendRes, setBackendRes] = useState("")
     const [inputFieldValid, setInputFieldValid] = useState("")
 
 
@@ -16,7 +16,7 @@ function Signup() {
         password: "",
         confirmPassword: "",
         profileImage: "",
-        policyAgree: true
+        policyAgree: false
     })
 
     const handleChange = (e) => {
@@ -27,10 +27,18 @@ function Signup() {
         setUserSignupData({...userSignupData, profileImage: e.target.files[0]})
         console.log(userSignupData.profileImage);
     }
+    const handleCheckbox = (e) => {
+        setUserSignupData({...userSignupData, policyAgree: e.target.checked})
+        console.log(e.target.checked);
+    }
+
+
     
     const signupBtn = (e) => {
         e.preventDefault()
         console.log(inputFieldValid);
+        console.log(userSignupData);
+        setInputFieldValid("")
 
         if(userSignupData.fullName !== ""){
             if(userSignupData.email !== ""){
@@ -46,10 +54,20 @@ function Signup() {
                     
                             axios.post(`${databaseApi}/users/signup`, formData)
                             .then(res => {
-                                console.log(res);
+                                console.log(res.data);
+                                setBackendRes(res.data)
+                                setUserSignupData({
+                                    fullName: "",
+                                    email: "",
+                                    password: "",
+                                    confirmPassword: "",
+                                    profileImage: "",
+                                    policyAgree: false
+                                })
+                                setInputFieldValid("")
                             })
                             .catch(err => {
-                                console.log(err);
+                                setBackendRes(err.response.data)
                             })
                         }else{
                             setInputFieldValid("policy error")
@@ -68,6 +86,11 @@ function Signup() {
         }
     }
 
+    useEffect(() => {
+        console.log(backendRes);
+        console.log(backendRes.indexOf("is invalid"));
+    }, [backendRes])
+
     return(
         <>
             <div className={SignupStyle.goHome}>
@@ -76,18 +99,18 @@ function Signup() {
             <div className={`${SignupStyle.containerPosition}`}>
                 <div className={`${SignupStyle.containerMain}`}>
                     <h1 className="text-center">Signup</h1>
-                    {/* {
-                        backendRes.data.message ?
-                        backendRes.data.message === "Signup Successful" ?
+                    {
+                        backendRes !== "" ?
+                        backendRes === "Signup Successful" ?
                         <p className="text-center py-1 text-success">Signup successful</p> : 
                         "" : ""
-                    } */}
+                    }
                     
                     <form autoComplete="off" onSubmit={signupBtn} encType="multipart/form-data">
 
                         <div className="mb-3">
                             <label className="form-label">Full Name*</label>
-                            <input type="text" className="form-control" name="fullName" onChange={handleChange} />
+                            <input type="text" className="form-control" name="fullName" onChange={handleChange} value={userSignupData.fullName || ""} />
                             {
                                inputFieldValid !== "Empty fullName"?
                                "" : 
@@ -97,29 +120,29 @@ function Signup() {
 
                         <div className="mb-3">
                             <label className="form-label">Email address*</label>
-                            <input type="email" className="form-control" name="email" autoComplete="off" onChange={handleChange} />
+                            <input type="email" className="form-control" name="email" autoComplete="off" onChange={handleChange} value={userSignupData.email || ""} />
                             {
                                inputFieldValid !== "Empty email" ?
                                "" : 
                                <div className="form-text errorOne">Input your email</div>
                             }
                             {
-                               backendRes.error ?
-                               backendRes.error.indexOf("email` is invalid") < 0 ?
-                               "" : 
+                                backendRes !== "" && backendRes !== "Empty email" ?
+                               backendRes.indexOf("is invalid") < 0 ?
                                <div className="form-text errorOne">Invalid Email</div> : ""
+                               : ""
                             }
                             {
-                               backendRes.error ?
-                               backendRes.error.indexOf("duplicate key error collection") < 0 ?
-                               "" : 
+                                backendRes !== "" && backendRes !== "Empty email" ?
+                               backendRes.indexOf("duplicate key error collection") < 0 ?
                                <div className="form-text errorOne">Your email already used</div> : ""
+                               : ""
                             }
                         </div>
 
                         <div className="mb-3">
                             <label className="form-label">Password*</label>
-                            <input type="password" className="form-control" name="password" autoComplete="off" onChange={handleChange} />
+                            <input type="password" className="form-control" name="password" autoComplete="off" onChange={handleChange} value={userSignupData.password || ""} />
                             {
                                inputFieldValid !== "Empty password" ?
                                "" : 
@@ -130,7 +153,7 @@ function Signup() {
 
                         <div className="mb-3">
                             <label className="form-label">Confirm Password*</label>
-                            <input type="password" className="form-control" name="confirmPassword" autoComplete="off" onChange={handleChange} />
+                            <input type="password" className="form-control" name="confirmPassword" autoComplete="off" onChange={handleChange} value={userSignupData.confirmPassword || ""} />
                             {
                                inputFieldValid !== "password not matched" ?
                                "" : 
@@ -144,7 +167,7 @@ function Signup() {
                         </div>
 
                         <div className="mb-3 form-check">
-                            <input type="checkbox" name="policyAgree" className={`form-check-input ${SignupStyle.checkedColor} ${inputFieldValid === "policy error" ? SignupStyle.checkedColor : ""}`} onChange={handleChange} />
+                            <input type="checkbox" name="policyAgree" className={`form-check-input ${inputFieldValid === "policy error" ? SignupStyle.checkedColor : ""}`} onChange={handleCheckbox} checked={userSignupData.policyAgree || false} />
                             <label className="form-check-label" >Agree with our <span>Privacy Policy</span>.</label>
                         </div>
 

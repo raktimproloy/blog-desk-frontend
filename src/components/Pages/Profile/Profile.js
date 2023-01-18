@@ -34,14 +34,26 @@ function Profile() {
             <div className="container py-5 d-flex justify-content-between">
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>
-                <div className={ProfileStyle.profileDetailsContainer}>
-                    {userData.map((user) =>
-                        <User key={user._id} userData={user}/>
+                {userData.map((user) =>
+                    <div key={user._id}>
+                        <div className={ProfileStyle.profileDetailsContainer}>
+                            
+                                
+                                <User userData={user}/>
+                                
+                        </div>
+                        <div className="my-4">
+                            {
+                                user.blogs.map(blog => 
+                                    <ProfileBlog key={blog} blogId={blog} />
+                                    
+                                )
+                            }
+                        </div>
+                    
+                    </div>
+
                     )}
-                </div>
-                <div className="defaultBorder my-4">
-                    <ProfileBlog/>
-                </div>
                 </div>
                 {/* Left Side */}
                 <div className={`rightSectionContainer`}>
