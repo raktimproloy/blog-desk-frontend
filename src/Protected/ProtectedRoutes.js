@@ -1,6 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
 import AuthVerification from "../commonFunc/AuthVerification";
-import Login from "../components/Pages/Login/Login"
 
 const useAuth = () => {
     const user  = {loggedIn : false}

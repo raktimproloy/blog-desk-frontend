@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import ContextApi from "../../../../../ContextApi/ContextApi";
 import Image from "../../../../../images/building.jpeg"
+import themeOneStyle from "./style.module.css"
 
-function ThemeOne() {
+function ThemeOne({blogData}) {
+    const {databaseApi} = useContext(ContextApi)
     return(
         <>
             <div>
-                <img src={Image} alt="Blog Image" />
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-                <img src={Image} alt="Blog Image" />
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <img src={`${databaseApi}/${blogData.BlogImageOne}`} alt="Blog" className={themeOneStyle.firstImage} />
+                <p>{blogData.firstDescription}</p>
+                <img src={`${databaseApi}/${blogData.BlogImageTwo}`} alt="Blog" className={themeOneStyle.secondImage} />
+                <p>{blogData.secondDescription}</p>
                 <div>
-                    <img src={Image} alt="Blog Image" />
-                    <img src={Image} alt="Blog Image" />
+                    <img src={`${databaseApi}/${blogData.BlogImageThree}`} alt="Blog" className={themeOneStyle.thirdImage} />
+                    <img src={`${databaseApi}/${blogData.BlogImageFour}`} alt="Blog" className={themeOneStyle.fourthImage} />
                 </div>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <p>{blogData.thirdDescription}</p>
             </div>
         </>
     )

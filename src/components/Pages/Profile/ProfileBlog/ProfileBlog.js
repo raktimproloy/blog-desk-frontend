@@ -1,10 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import BlogStyleCss from "../style.module.css"
 import ContextApi from "../../../../ContextApi/ContextApi";
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 
 function ProfileBlog({blogId}) {
     const {databaseApi} = useContext(ContextApi)
+    const navigate = useNavigate();
     const [blogData, setBlogData] = useState({})
 
     useEffect(() => {
@@ -17,14 +19,18 @@ function ProfileBlog({blogId}) {
             })
             
     }, [])
+    const clickBlog = () => {
+        navigate(`/blog?id=${blogId}`)
+    }
 
     return(
         <div className="defaultBorder d-flex justify-content-between align-items-start p-4 my-3">
-
-            <img src={`${databaseApi}/${blogData.BlogImageOne}`} alt="Standard Image" className={BlogStyleCss.blogBigImageTwo} />
+            <img src={`${databaseApi}/${blogData.BlogImageOne}`} alt="Standard" className={BlogStyleCss.blogBigImageTwo} />
             <div className={`ms-4 ${BlogStyleCss.blogRightSide}`}>
-                <h1>{blogData.title}</h1>
-                <p className="mb-3">Category</p>
+                
+                <h1 className="pointer" onClick={clickBlog}>{blogData.title}</h1>
+                <p>{blogData.category}</p>
+                <p className="mb-3">{blogData.postedTime}</p>
                 <p>{blogData.firstDescription}</p>
             </div>
         </div>

@@ -22,10 +22,6 @@ function App() {
         <Route path="login" element={ <Login/> } />
         <Route path="category" element={ <Category/> } />
         <Route path="blog" element={ <Blog/> } />
-        {/* <Route path="post" element={
-          <Protected isLoggedIn={isLoggedIn}>
-            <Post/>
-          </Protected>  } /> */}
           <Route element={<ProtectedRoutes/>}>
             <Route path="/post" element={<Post/>} />
           </Route>

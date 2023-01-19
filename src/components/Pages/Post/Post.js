@@ -4,12 +4,14 @@ import Navbar from "../../Sections/Navbar/Navbar";
 import PageHeading from "../../Sections/PageHeading/PageHeading";
 import postStyle from "./style.module.css"
 import ThemeInputsOne from "./ThemeInputs/ThemeInputsOne/ThemeInputsOne";
+import { SlArrowRight, SlArrowDown } from 'react-icons/sl';
 import ThemeOneImage from "../../../images/themeImage/themeOne.png"
 import ContextApi from "../../../ContextApi/ContextApi";
 import AuthVerification from "../../../commonFunc/AuthVerification";
 
 function Post () {
     const {databaseApi} = useContext(ContextApi)
+    const [category, setCategory] = useState("None")
     const [postResponse, setPostResponse] = useState({})
     const [selectTheme, setSelectTheme] = useState("themeOne")
     const {isExp, userId, fullName, email} = AuthVerification();
@@ -33,8 +35,16 @@ function Post () {
 
     const postBlogBtn = async (e) => {
         e.preventDefault()
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        const date = new Date()
         
-        console.log("userId",userId);
+        console.log("date",date.getDate());
+        console.log("month",monthNames[date.getMonth()]);
+        console.log("month",date.getFullYear());
+        const postedTime = `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
+
         const formData = new FormData()
         formData.append("userId", userId)
         formData.append("BlogImageOne", themeOnePostItem.BlogImageOne)
@@ -43,9 +53,11 @@ function Post () {
         formData.append("BlogImageFour", themeOnePostItem.BlogImageFour)
         formData.append("theme", blogItem.theme)
         formData.append("title", blogItem.title)
+        formData.append("category", category)
         formData.append("firstDescription", themeOnePostItem.firstDescription)
         formData.append("secondDescription", themeOnePostItem.secondDescription)
         formData.append("thirdDescription", themeOnePostItem.thirdDescription)
+        formData.append("postedTime", postedTime)
 
         axios.post(`${databaseApi}/blog/post`, formData)
             .then(res => {
@@ -90,6 +102,18 @@ function Post () {
                             <div>
                                 <p>Main Title</p>
                                 <input type="text" placeholder="Blog Title" className="inputStyle" name="title" onChange={(e) => {setBlogItem({...blogItem, title: e.target.value})}} />
+                            </div>
+                            <div>
+                                <p>Category</p>
+                                <ul className={`inputStyle d-flex justify-content-between align-items-center ${postStyle.selectContainer}`}>
+                                    <li>{category}</li>
+                                    <li className={`${postStyle.selectRightArrow}`}><SlArrowRight/></li>
+                                        <ul className={`defaultBorder ${postStyle.optionContainer}`}>
+                                            <li onClick={() => setCategory("Standard")}><span>Standard</span></li>
+                                            <li onClick={() => setCategory("Common")}><span>Common</span></li>
+                                            <li onClick={() => setCategory("Treading")}><span>Treading</span></li>
+                                        </ul>
+                                </ul>
                             </div>
                             <div>
                                 <ThemeInputsOne themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>

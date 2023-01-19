@@ -12,3 +12,48 @@
 .selectTheme{
     border: 1px solid #fe4f70 !important;
 }
+
+/* Select Category option style */
+.selectContainer{
+    position: relative;
+    cursor: pointer;
+}
+.selectRightArrow{
+    transition: all .2s ease-in-out;
+    
+}
+.optionContainer{
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    padding: 5px 7px;
+    background-color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .1s ease-in-out;
+}
+.optionContainer li {
+    cursor: pointer;
+    padding: 5px 5px;
+    border-bottom: 1px solid #80808024;
+}
+.optionContainer li span{
+    transition: all .2s ease-in-out;
+}
+.optionContainer li:last-child {
+    border-bottom: 0px solid #80808024;
+}
+.optionContainer li:hover span{
+    color: #fe4f70;
+    margin-left: 4px;
+}
+
+.selectContainer:hover .optionContainer{
+    visibility: visible;
+    opacity: 1;
+    
+}
+.selectContainer:hover .selectRightArrow{
+    transform: rotate(90deg);
+}
