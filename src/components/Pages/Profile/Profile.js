@@ -44,7 +44,7 @@ function Profile() {
                         </div>
                         <div className="my-4">
                             {
-                                user.blogs.map(blog => 
+                                user.blogs?.reverse().map(blog => 
                                     <ProfileBlog key={blog} blogId={blog} />
                                     
                                 )
