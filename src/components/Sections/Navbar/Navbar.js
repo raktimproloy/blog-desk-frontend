@@ -52,10 +52,10 @@ function Navbar () {
                                     Category
                                 </span>
                                 <ul className={`dropdown-menu ${NavbarStyle.dropdownBox} ${showDropdown? "d-block" : ""}`}>
-                                    <li><Link className="dropdown-item" to={"/category"}>Standard</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category"}>Common</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category"}>Treading</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category"}>Inspiration</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=standard"}>Standard</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=common"}>Common</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=treading"}>Treading</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=inspiration"}>Inspiration</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item mx-2">
@@ -96,10 +96,10 @@ function Navbar () {
                                     Category
                                 </span>
                                 <ul className={`dropdown-menu ${NavbarStyle.dropdownBox} ${showSideNavbarDropdown? "d-block" : ""}`}>
-                                <li><Link className="dropdown-item" to={"/category"}>Standard</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category"}>Common</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category"}>Treading</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category"}>Inspiration</Link></li>
+                                <li><Link className="dropdown-item" to={"/category?c=standard"}>Standard</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=common"}>Common</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=treading"}>Treading</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=inspiration"}>Inspiration</Link></li>
                                 </ul>
                             </li>
                             <li><Link to={"/category"}>Popular</Link></li>
@@ -107,8 +107,8 @@ function Navbar () {
                             { 
                                     AuthVerification().isExp ? 
                                     <>
-                                    <li><Link to={"/profile"}>Profile</Link></li> 
-                                    <li><Link to={"/setting"}>Setting</Link></li> 
+                                    <li><Link to={`/profile?userId=${userId}`}>Profile</Link></li> 
+                                    <li><Link to={`/setting?userId=${userId}`}>Setting</Link></li> 
                                     <li onClick={logoutBtn}><Link to={"/login"}>Log out</Link></li> 
                                     
                                     </>

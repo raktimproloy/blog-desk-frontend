@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../../Sections/Navbar/Navbar"
 import About from "../../Sections/About/About";
 import PopularSection from "../../Sections/Popular/PopularSection";
@@ -6,12 +6,53 @@ import BlogStyleOne from "../../Sections/BlogStyle/BlogStyleOne/BlogStyleOne";
 import BlogStyleTwo from "../../Sections/BlogStyle/BlogStyleTwo/BlogStyleTwo";
 import BlogStyleThree from "../../Sections/BlogStyle/BlogStyleThree/BlogStyleThree";
 import PageHeading from "../../Sections/PageHeading/PageHeading";
-
+import axios from "axios";
+import ContextApi from "../../../ContextApi/ContextApi";
 import HomeStyle from "./style.module.css"
 
 import testImage from "../../../images/building.jpeg"
 
 function Home() {
+    const [allBlogs, setAllBlogs] = useState([])
+    const [standardBlog, setStandardBlog] = useState([])
+    const [commonBlog, setCommonBlog] = useState([])
+    const [treadingBlog, setTreadingBlog] = useState([])
+
+
+    const {databaseApi} = useContext(ContextApi)
+
+    useEffect(() => {
+        axios.get(`${databaseApi}/blog/blogs/all`)
+            .then(res => {
+                setAllBlogs(res.data.reverse())
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
+
+    useEffect(() => {
+        const standard = []
+        const common = []
+        const treading = []
+
+        for (let i = 0; i < allBlogs.length; i++) {
+            if(allBlogs[i].category === "Standard" && standardBlog.length < 6){
+                standard.push(allBlogs[i])
+            }else if(allBlogs[i].category === "Common" && commonBlog.length < 7){
+                common.push(allBlogs[i])
+            }else if(allBlogs[i].category === "Treading" && treadingBlog.length < 6){
+                treading.push(allBlogs[i])
+            }else if(standardBlog.length === 5 && commonBlog.length === 6 && treadingBlog.length === 5){
+                break;
+            }
+        }
+
+        setStandardBlog(standard)
+        setCommonBlog(common)
+        setTreadingBlog(treading)
+    }, [allBlogs])
+
     return(
         <>
             <Navbar/>
@@ -20,53 +61,44 @@ function Home() {
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>
                     <div>
-                        <h2 className="py-2">Standard Blog</h2>
-                        <div className="defaultBorder d-flex justify-content-between p-2">
+                        <h1 className="mb-3">Standard Blog</h1>
+                        <div className="defaultBorder d-flex justify-content-between p-2 mb-5">
                             <div className={`p-3 ${HomeStyle.standardBlogRightPart}`}>
-                                <BlogStyleTwo/>
+                                <BlogStyleTwo blogData={standardBlog[0]} />
                             </div>
-                            <div className={`p-3 ${HomeStyle.standardBlogLeftPart}`}>
-                                <BlogStyleOne/>
-                                <BlogStyleOne/>
-                                <BlogStyleOne/>
-                                <BlogStyleOne/>
+                            <div className={`p-4 ${HomeStyle.standardBlogLeftPart}`}>
+                                <BlogStyleOne blogData={standardBlog[1]}/>
+                                <BlogStyleOne blogData={standardBlog[2]}/>
+                                <BlogStyleOne blogData={standardBlog[3]}/>
+                                <BlogStyleOne blogData={standardBlog[4]}/>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <h1>Common Blog</h1>
-                        <div className="defaultBorder d-flex justify-content-between p-2">
+                        <h1 className="mb-3">Common Blog</h1>
+                        <div className="defaultBorder d-flex justify-content-between p-2 mb-5">
                             <div className={`p-3 ${HomeStyle.standardBlogRightPart}`}>
-                                <BlogStyleTwo/>
-                                <BlogStyleOne/>
-                                <BlogStyleOne/>
+                                <div className="mb-4">
+                                    <BlogStyleTwo blogData={commonBlog[0]} />
+                                </div>
+                                <BlogStyleOne blogData={commonBlog[2]} />
+                                <BlogStyleOne blogData={commonBlog[4]} />
                             </div>
                             <div className={`p-3 ${HomeStyle.standardBlogLeftPart}`}>
-                                <BlogStyleTwo/>
-                                <BlogStyleOne/>
-                                <BlogStyleOne/>
+                                <div className="mb-4">
+                                    <BlogStyleTwo blogData={commonBlog[1]} />
+                                </div>
+                                <BlogStyleOne blogData={commonBlog[3]} />
+                                <BlogStyleOne blogData={commonBlog[5]} />
                             </div>
                         </div>
                     </div>
                     <div>
-                        <h1>Common Blog</h1>
-                        <div className="defaultBorder d-flex justify-content-between p-2">
-                            <div className={`p-3 ${HomeStyle.standardBlogRightPart}`}>
-                                <BlogStyleTwo/>
-                                <BlogStyleOne/>
-                                <BlogStyleOne/>
-                            </div>
-                            <div className={`p-3 ${HomeStyle.standardBlogLeftPart}`}>
-                                <BlogStyleTwo/>
-                                <BlogStyleOne/>
-                                <BlogStyleOne/>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h1>Common Blog</h1>
-                        <div>
-                        <BlogStyleThree/>
+                        <h1 className="mb-3">Treading Blog</h1>
+                        <div className="mb-5">
+                        <BlogStyleThree blogData={treadingBlog[0]} />
+                        <BlogStyleThree blogData={treadingBlog[1]} />
+                        <BlogStyleThree blogData={treadingBlog[2]} />
                         </div>
                     </div>
                 </div>

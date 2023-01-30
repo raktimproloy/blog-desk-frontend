@@ -5,6 +5,7 @@ import Category from "./components/Pages/Category/Category"
 import Blog from "./components/Pages/Blog/Blog"
 import Post from "./components/Pages/Post/Post";
 import Profile from "./components/Pages/Profile/Profile";
+import Setting from "./components/Pages/Setting/Setting";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./common/css/style.css"
 import {
@@ -24,6 +25,7 @@ function App() {
         <Route path="blog" element={ <Blog/> } />
           <Route element={<ProtectedRoutes/>}>
             <Route path="/post" element={<Post/>} />
+            <Route path="/setting" element={<Setting/>} />
           </Route>
         <Route path="Profile" element={ <Profile/> } />
       </Routes>

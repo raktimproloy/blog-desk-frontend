@@ -12,10 +12,13 @@ function Signup() {
 
     const [userSignupData, setUserSignupData] = useState({
         fullName: "",
+        about: "I love blogger",
         email: "",
         password: "",
         confirmPassword: "",
         profileImage: "",
+        facebook: "facebook",
+        twitter: "twitter",
         policyAgree: false
     })
 
@@ -49,8 +52,11 @@ function Signup() {
                             const formData = new FormData()
                             formData.append("profileImage", userSignupData.profileImage)
                             formData.append("fullName", userSignupData.fullName)
+                            formData.append("about", userSignupData.about)
                             formData.append("email", userSignupData.email)
                             formData.append("password", userSignupData.password)
+                            formData.append("facebook", userSignupData.facebook)
+                            formData.append("twitter", userSignupData.twitter)
                     
                             axios.post(`${databaseApi}/users/signup`, formData)
                             .then(res => {
@@ -67,6 +73,7 @@ function Signup() {
                                 setInputFieldValid("")
                             })
                             .catch(err => {
+                                console.log(err.response.data);
                                 setBackendRes(err.response.data)
                             })
                         }else{

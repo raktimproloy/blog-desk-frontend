@@ -3,6 +3,9 @@ import Navbar from "../../Sections/Navbar/Navbar"
 import PageHeading from "../../Sections/PageHeading/PageHeading"
 import MainBlogStyle from "./style.module.css"
 import ThemeOne from "./Themes/ThemeOne/ThemeOne";
+import ThemeTwo from "./Themes/ThemeTwo/ThemeTwo";
+import ThemeThree from "./Themes/ThemeThree/ThemeThree";
+import ThemeFour from "./Themes/ThemeFour/ThemeFour";
 import Comment from "./Comment/Comment";
 import ContextApi from "../../../ContextApi/ContextApi";
 import { AiFillHeart } from "react-icons/ai";
@@ -89,10 +92,6 @@ function Blog (){
         }
     }
 
-    const handleAfterLike = () => {
-        console.log("LIke Check", isLiked);
-    }
-
     const handleComment = (e) => {
         e.preventDefault()
         setComment(e.target.value)
@@ -132,9 +131,17 @@ function Blog (){
                         <h1 className={MainBlogStyle.title}>{blogData.title}</h1>
                         <div>
                             {
-                                blogData.theme === "Theme One" && <ThemeOne blogData={blogData}/>
+                                blogData.theme === "themeOne" && <ThemeOne blogData={blogData}/>
                             }
-                            
+                            {
+                                blogData.theme === "themeTwo" && <ThemeTwo blogData={blogData}/>
+                            }
+                            {
+                                blogData.theme === "themeThree" && <ThemeThree blogData={blogData}/>
+                            }
+                            {
+                                blogData.theme === "themeFour" && <ThemeFour blogData={blogData}/>
+                            }
                         </div>
                         <div className="text-center py-3">
                             <span className={`ps-4 pointer ${isLiked && MainBlogStyle.liked}`} onClick={clickLike}><AiFillHeart/>{` (${countLike})`}</span>

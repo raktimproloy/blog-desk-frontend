@@ -75,6 +75,9 @@ function Post () {
                     secondDescription: "",
                     thirdDescription: "",
                 })
+                setBlogItem({
+                    title: ""
+                })
             })
             .catch(err => {
                 console.log(err);
@@ -85,6 +88,9 @@ function Post () {
             <Navbar/>
             <PageHeading/>
             <div className="container py-5 d-flex justify-content-between">
+                {/* <div>
+                    <p>Posted Successful</p>
+                </div> */}
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>
                     <h1 className="text-center py-2">Post Your Blog</h1>
@@ -114,7 +120,7 @@ function Post () {
                             </div>
                             <div>
                                 <p>Main Title</p>
-                                <input type="text" placeholder="Blog Title" className="inputStyle" name="title" onChange={(e) => {setBlogItem({...blogItem, title: e.target.value})}} />
+                                <input type="text" placeholder="Blog Title" className="inputStyle" name="title" onChange={(e) => {setBlogItem({...blogItem, title: e.target.value})}} value={blogItem.title || ""} />
                             </div>
                             <div>
                                 <p>Category</p>

@@ -1,18 +1,29 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useContext, useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import BlogStyleCss from "../style.module.css"
+import ContextApi from "../../../../ContextApi/ContextApi";
 
 import ImageOne from "../../../../images/building.jpeg"
 
-function BlogStyleOne() {
+function BlogStyleOne({blogData}) {
+    const navigate = useNavigate()
+    const [data, setData] = useState({})
+    const {databaseApi} = useContext(ContextApi)
+    useEffect(() => {
+        if(blogData){
+            setData(blogData)
+        }
+    }, [blogData])
+
+    const clickBlog = () => {
+        navigate(`/blog?id=${data._id}`)
+    }
     return(
         <div className={`d-flex mb-4 ${BlogStyleCss.BlogStyleOneContainer}`}>
-            <img src={ImageOne} alt="Standard Image" />
+            <img src={`${databaseApi}/${data?.BlogImageOne}`} alt="Standard" />
             <div className={`ms-3 ${BlogStyleCss.BlogStyleOneText}`}>
-                <Link to={"/blog"}>
-                    <h5>Facts About Business That Will Help You Success</h5>
-                </Link>
-                <p>23 August, 2022</p>
+                <h5 className="pointer" onClick={clickBlog}>{data?.title}</h5>
+                <p>{data?.postedTime}</p>
             </div>
         </div>
     )

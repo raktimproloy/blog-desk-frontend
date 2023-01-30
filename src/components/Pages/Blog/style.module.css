@@ -29,6 +29,8 @@
 .title{
     font-size: 2.5rem;
     font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
 }
 .ownerSectionTitle{
     font-weight: bold;
@@ -54,4 +56,32 @@
 }
 .commentButton{
     cursor: pointer;
+}
+
+/* Theme Style */
+.descriptionText{
+    margin-bottom: 20px;
+}
+.firstImage{
+    width: 100%;
+    height: 50vh;
+    margin-bottom: 20px;
+}
+.secondImage{
+    width: 100%;
+    height: 50vh;
+    margin-bottom: 20px;
+}
+.thirdImageBig{
+    width: 100%;
+    height: 50vh;
+    margin-bottom: 20px;
+}
+.thirdImage{
+    width: 50%;
+    height: 25vh;
+}
+.fourthImage{
+    width: 50%;
+    height: 25vh;
 }
