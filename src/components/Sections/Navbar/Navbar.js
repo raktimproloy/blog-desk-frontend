@@ -8,6 +8,7 @@ import AuthVerification from "../../../commonFunc/AuthVerification";
 
 function Navbar () {
     
+    const [stickyClass, setStickyClass] = useState(false)
     const [showDropdown, setShowDropdown] = useState(false);
     const [showSearchPopup, setShowSearchPopup] = useState(false)
     const [showSideNavbar, setShowSideNavbar] = useState(false)
@@ -17,7 +18,20 @@ function Navbar () {
     const logoutBtn = () => {
         localStorage.clear()
     }
-    console.log("nav", isExp);
+    useEffect(() => {
+        window.addEventListener('scroll', stickNavbar);
+    
+        return () => {
+          window.removeEventListener('scroll', stickNavbar);
+        };
+      }, []);
+    
+      const stickNavbar = () => {
+        if (window !== undefined) {
+          let windowHeight = window.scrollY;
+          windowHeight > 200 ? setStickyClass(true) : setStickyClass(false);
+        }
+      };
 
     return(
         <>
@@ -35,10 +49,63 @@ function Navbar () {
                 <p className={NavbarStyle.searchPopupClose}  onClick={ () => setShowSearchPopup(false)}><RxCross2/></p>
             </div>
 
-            {/* Navbar Start */}
-            <nav className="navbar navbar-expand-lg navbar-light py-4">
+            {/* Navbar static */}
+            <nav className={`navbar navbar-expand-lg navbar-light py-4 ${stickyClass}`}>
                 <div className="container">
+                    <h1>
                     <Link className={`navbar-brand titleText`} to={"/"}>BlogDesk</Link>
+                    </h1>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item bgColorLeftToRight mx-2" >
+                                <a className="nav-link" href="/">Home</a>
+                            </li>
+                            <li className="nav-item dropdown mx-2">
+                                <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button"onClick={() => setShowDropdown(!showDropdown)}>
+                                    Category
+                                </span>
+                                <ul className={`dropdown-menu ${NavbarStyle.dropdownBox} ${showDropdown? "d-block" : ""}`}>
+                                    <li><Link className="dropdown-item" to={"/category?c=standard"}>Standard</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=common"}>Common</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=treading"}>Treading</Link></li>
+                                    <li><Link className="dropdown-item" to={"/category?c=inspiration"}>Inspiration</Link></li>
+                                </ul>
+                            </li>
+                            <li className="nav-item mx-2">
+                                <Link className="nav-link" to={"/category"}>Popular</Link>
+                            </li>
+                            <li className="nav-item mx-2">
+                                <Link className="nav-link" to={isExp ? "/post" : "/login"}>Post</Link>
+                            </li>
+                            
+                        </ul>
+                        <ul className="navbar-nav mb-2 mb-lg-0">
+                            <li className="nav-item mx-2">
+                                { 
+                                    AuthVerification().isExp ? <Link className="nav-link" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
+                                }
+                                
+                            </li>
+                            <li className="nav-item mx-2">
+                                <span className="nav-link" onClick={ () => setShowSearchPopup(true)}><BiSearchAlt2/></span>
+                            </li>
+                            <li className="nav-item bgColorTopToBottom mx-2">
+                                <span className="nav-link" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            {/* Navbar Start */}
+            <nav className={`navbar navbar-expand-lg navbar-light py-4 ${stickyClass ? "fixed" : "none"}`}>
+                <div className="container">
+                    <h1>
+                    <Link className={`navbar-brand titleText`} to={"/"}>BlogDesk</Link>
+                    </h1>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>

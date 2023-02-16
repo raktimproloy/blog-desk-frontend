@@ -9,7 +9,10 @@ import axios from "axios"
 import { useLocation } from "react-router-dom";
 
 function Profile() {
-    
+    const pageHeadingDetails = {
+        title: "Home",
+        des: "Home Can Help You To Decide Your Reading Blog"
+    }
     const [userData, setUserData] = useState([])
     const {databaseApi} = useContext(ContextApi)
     
@@ -30,7 +33,7 @@ function Profile() {
     return(
         <>
             <Navbar/>
-            <PageHeading/>
+            <PageHeading pageHeadingDetails={pageHeadingDetails} />
             <div className="container py-5 d-flex justify-content-between">
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>

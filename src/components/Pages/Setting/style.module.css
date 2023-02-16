@@ -1,0 +1,69 @@
+.settingProfileImage{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    outline: 3px solid #ff214a;
+}
+.inputOtp{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #00000069;
+    z-index: 999;
+    visibility: visible;
+    opacity: 1;
+}
+.otpInput{
+    width: 100%;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.searchPopupClose{
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white !important;
+}
+.inputOtpClose{
+  visibility: hidden;
+  opacity: 0;
+}
+.verifiedButton{
+  color: #fff;
+  padding: 0px 30px;
+  background: #4d1721;
+  background: -webkit-linear-gradient(left,#4b161f 0%,#53352c 51%,#4d1721 100%);
+  background: linear-gradient(to right,#4b161f 0%,#53352c 51%,#4d1721 100%);
+  background-size: 200% auto;
+  border-radius: 20px;
+  transition: all .2s ease-in-out;
+}
+.verifyPopupErrorText{
+  color: #ff214a !important;
+  text-align: center;
+}
+.linkInputIcon{
+  background-color: #fe4f70;
+  padding: 8px 0 8px 0;
+  text-align: center;
+  color: white!important;
+  width: 70px;
+  border-radius: 10px 0 0 10px;
+}
+.linkInputField{
+  border-radius: 0px 10px 10px 0 !important;
+}

@@ -39,13 +39,13 @@ function BlogStyleTwo({blogData}) {
         <div>
             <img src={`${databaseApi}/${data?.BlogImageOne}`} alt="Standard" className={BlogStyleCss.blogBigImage}/>
             <div className={`d-flex align-items-center py-2 mt-2 ${BlogStyleCss.authorImage}`}>
-                <img src={ImageOne} alt="Author" className="ms-4 me-2" />
+                <img src={`${databaseApi}/${authorData?.profileImage}`} alt="Author" className="ms-4 me-2" />
                 <p className="pointer" onClick={clickProfile}>{authorData?.fullName}</p>
                 <p className={`${BlogStyleCss.blogTwoPostedTime} text-end`}>{data?.postedTime}</p>
             </div>
-            <h1 className="pointer" onClick={clickBlog}>{data?.title}</h1>
-            <p className={`mb-2`}>{data?.firstDescription?.slice(0, 135)}{data?.firstDescription?.length > 135 && <span> ...</span>}</p>
-            {data?.firstDescription?.length > 135 && <p className="pointer" onClick={clickBlog}>See more</p>}
+            <h4 className="pointer" onClick={clickBlog}>{data?.title}</h4>
+            <p className={`mb-2 meta`}>{data?.firstDescription?.slice(0, 135)}{data?.firstDescription?.length > 135 && <span> ...</span>}</p>
+            {data?.firstDescription?.length > 135 && <p className="pointer" onClick={clickBlog}><u>See more</u></p>}
             
         </div>
     )

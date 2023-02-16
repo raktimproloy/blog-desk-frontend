@@ -6,6 +6,7 @@ import BlogStyleOne from "../../Sections/BlogStyle/BlogStyleOne/BlogStyleOne";
 import BlogStyleTwo from "../../Sections/BlogStyle/BlogStyleTwo/BlogStyleTwo";
 import BlogStyleThree from "../../Sections/BlogStyle/BlogStyleThree/BlogStyleThree";
 import PageHeading from "../../Sections/PageHeading/PageHeading";
+import Footer from "../../Sections/Footer/Footer";
 import axios from "axios";
 import ContextApi from "../../../ContextApi/ContextApi";
 import HomeStyle from "./style.module.css"
@@ -17,7 +18,10 @@ function Home() {
     const [standardBlog, setStandardBlog] = useState([])
     const [commonBlog, setCommonBlog] = useState([])
     const [treadingBlog, setTreadingBlog] = useState([])
-
+    const pageHeadingDetails = {
+        title: "Home",
+        des: "Home Can Help You To Decide Your Reading Blog"
+    }
 
     const {databaseApi} = useContext(ContextApi)
 
@@ -56,12 +60,12 @@ function Home() {
     return(
         <>
             <Navbar/>
-            <PageHeading/>
+            <PageHeading pageHeadingDetails={pageHeadingDetails}/>
             <div className="container py-5 d-flex justify-content-between">
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>
                     <div>
-                        <h1 className="mb-3">Standard Blog</h1>
+                        <h3 className="mb-4 animateUnderline">Standard Blog</h3>
                         <div className="defaultBorder d-flex justify-content-between p-2 mb-5">
                             <div className={`p-3 ${HomeStyle.standardBlogRightPart}`}>
                                 <BlogStyleTwo blogData={standardBlog[0]} />
@@ -75,7 +79,7 @@ function Home() {
                         </div>
                     </div>
                     <div>
-                        <h1 className="mb-3">Common Blog</h1>
+                        <h3 className="mb-4 animateUnderline">Common Blog</h3>
                         <div className="defaultBorder d-flex justify-content-between p-2 mb-5">
                             <div className={`p-3 ${HomeStyle.standardBlogRightPart}`}>
                                 <div className="mb-4">
@@ -94,7 +98,7 @@ function Home() {
                         </div>
                     </div>
                     <div>
-                        <h1 className="mb-3">Treading Blog</h1>
+                        <h3 className="mb-4 animateUnderline">Treading Blog</h3>
                         <div className="mb-5">
                         <BlogStyleThree blogData={treadingBlog[0]} />
                         <BlogStyleThree blogData={treadingBlog[1]} />
@@ -108,6 +112,7 @@ function Home() {
                     <PopularSection/>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

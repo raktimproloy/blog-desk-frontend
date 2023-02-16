@@ -5,11 +5,16 @@ import CategoryStyle from "./style.module.css"
 import BlogStyleThree from "../../Sections/BlogStyle/BlogStyleThree/BlogStyleThree"
 import About from "../../Sections/About/About"
 import PopularSection from "../../Sections/Popular/PopularSection"
+import Footer from "../../Sections/Footer/Footer"
 import ContextApi from "../../../ContextApi/ContextApi";
 import axios from "axios"
 import { useLocation } from "react-router-dom";
 
 function Category() {
+    const pageHeadingDetails = {
+        title: "Category",
+        des: "Category Help You To Select Your Favorite Blogs"
+    }
     const {search} = useLocation()
     const queryParams = new URLSearchParams(search)
     const category = queryParams.get("c")
@@ -28,7 +33,7 @@ function Category() {
     return(
         <>
             <Navbar/>
-            <PageHeading/>
+            <PageHeading pageHeadingDetails={pageHeadingDetails} />
             <div className="container py-5 d-flex justify-content-between">
                 {/* Left Side */}
                 <div className={`leftSectionContainer`}>
@@ -47,6 +52,7 @@ function Category() {
                     <PopularSection/>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

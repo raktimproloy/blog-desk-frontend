@@ -15,6 +15,10 @@ import axios from "axios";
 import AuthVerification from "../../../commonFunc/AuthVerification";
 
 function Blog (){
+    const pageHeadingDetails = {
+        title: "Home",
+        des: "Home Can Help You To Decide Your Reading Blog"
+    }
     const [userData, setUserData] = useState([])
     const [count, setCount] = useState(0)
     const [blogData, setBlogData] = useState({})
@@ -124,7 +128,7 @@ function Blog (){
     return(
         <>
             <Navbar/>
-            <PageHeading/>
+            <PageHeading pageHeadingDetails={pageHeadingDetails} />
             <div className="container py-5">
                 <div className="d-flex justify-content-between align-items-start">
                     <div className={`leftSectionContainer`}>

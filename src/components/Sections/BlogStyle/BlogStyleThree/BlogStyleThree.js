@@ -42,13 +42,13 @@ function BlogStyleThree({blogData}) {
             <img src={`${databaseApi}/${data?.BlogImageOne}`} alt="Blog" className={BlogStyleCss.blogBigImageTwo}/>
             <div className={`ms-4 ${BlogStyleCss.blogRightSide}`}>
                 <div className={`d-flex align-items-center py-2 ${BlogStyleCss.authorImage}`}>
-                    <img src={ImageOne} alt="Author" />
+                    <img src={`${databaseApi}/${authorData?.profileImage}`} alt="Author" />
                     <p className="pointer" onClick={clickProfile}>{authorData?.fullName}</p>
                     <p>{data?.postedTime}</p>
                 </div>
                 <h1 className="pointer" onClick={clickBlog}>{data?.title}</h1>
-                <p className={`mb-2`}>{data?.firstDescription?.slice(0, 170)}{data?.firstDescription?.length > 170 && <span> ...</span>}</p>
-                {data?.firstDescription?.length > 170 && <p className="pointer" onClick={clickBlog}>See more</p>}
+                <p className={`mb-2`}>{data?.firstDescription?.slice(0, 160)}{data?.firstDescription?.length > 160 && <span> ...</span>}</p>
+                {data?.firstDescription?.length > 160 && <p className="pointer" onClick={clickBlog}><u>See more</u></p>}
             </div>
         </div>
     )

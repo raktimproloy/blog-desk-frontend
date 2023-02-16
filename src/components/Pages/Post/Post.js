@@ -16,6 +16,10 @@ import ContextApi from "../../../ContextApi/ContextApi";
 import AuthVerification from "../../../commonFunc/AuthVerification";
 
 function Post () {
+    const pageHeadingDetails = {
+        title: "Post",
+        des: "Post Can Help You To Get Your Popularity"
+    }
     const {databaseApi} = useContext(ContextApi)
     const [category, setCategory] = useState("None")
     const [postResponse, setPostResponse] = useState({})
@@ -86,7 +90,7 @@ function Post () {
     return(
         <>
             <Navbar/>
-            <PageHeading/>
+            <PageHeading pageHeadingDetails={pageHeadingDetails} />
             <div className="container py-5 d-flex justify-content-between">
                 {/* <div>
                     <p>Posted Successful</p>
@@ -94,7 +98,8 @@ function Post () {
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>
                     <h1 className="text-center py-2">Post Your Blog</h1>
-                    <p className="text-center py-2">This is description for post blog</p>
+                    <p className="text-center pt-2">Select your theme and post your blog.</p>
+                    <p className="text-center pb-2">Note: Without verify you can post only 1 blog.</p>
                     <div>
                         <form onSubmit={postBlogBtn} encType="multipart/form-data">
                             <div className="py-3">

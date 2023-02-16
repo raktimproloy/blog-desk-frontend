@@ -32,7 +32,7 @@ function ProfileBlog({blogId}) {
                 <p>{blogData?.category}</p>
                 <p className="mb-3">{blogData?.postedTime}</p>
                 <p className={`mb-2`}>{blogData?.firstDescription?.slice(0, 170)}{blogData?.firstDescription?.length > 170 && <span> ...</span>}</p>
-                {blogData?.firstDescription?.length > 170 && <p className="pointer" onClick={clickBlog}>See more</p>}
+                {blogData?.firstDescription?.length > 170 && <p className="pointer" onClick={clickBlog}><u>See more</u></p>}
             </div>
         </div>
     )
