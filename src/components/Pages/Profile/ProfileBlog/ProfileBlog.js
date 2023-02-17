@@ -2,9 +2,10 @@ import React, { useEffect, useContext, useState } from "react";
 import BlogStyleCss from "../style.module.css"
 import ContextApi from "../../../../ContextApi/ContextApi";
 import { useNavigate } from "react-router-dom";
+import { MdDeleteForever } from 'react-icons/md';
 import axios from "axios"
 
-function ProfileBlog({blogId}) {
+function ProfileBlog({blogId, setDeletedBlog, setDeletePopup}) {
     const {databaseApi} = useContext(ContextApi)
     const navigate = useNavigate();
     const [blogData, setBlogData] = useState({})
@@ -17,6 +18,7 @@ function ProfileBlog({blogId}) {
             .catch(err => {
                 console.log(err);
             })
+        
             
     }, [])
     const clickBlog = () => {
@@ -24,7 +26,7 @@ function ProfileBlog({blogId}) {
     }
 
     return(
-        <div className="defaultBorder d-flex justify-content-between align-items-start p-4 my-3">
+        <div className={`defaultBorder d-flex justify-content-between align-items-start p-4 my-3`}>
             <img src={`${databaseApi}/${blogData?.BlogImageOne}`} alt="Standard" className={BlogStyleCss.blogBigImageTwo} />
             <div className={`ms-4 ${BlogStyleCss.blogRightSide}`}>
                 
@@ -34,6 +36,7 @@ function ProfileBlog({blogId}) {
                 <p className={`mb-2`}>{blogData?.firstDescription?.slice(0, 170)}{blogData?.firstDescription?.length > 170 && <span> ...</span>}</p>
                 {blogData?.firstDescription?.length > 170 && <p className="pointer" onClick={clickBlog}><u>See more</u></p>}
             </div>
+            <span className="pointer" onClick={() => {setDeletedBlog(blogId); setDeletePopup(true)}}><MdDeleteForever/></span>
         </div>
     )
 }

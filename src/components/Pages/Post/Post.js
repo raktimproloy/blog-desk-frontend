@@ -22,6 +22,7 @@ function Post () {
     }
     const {databaseApi} = useContext(ContextApi)
     const [category, setCategory] = useState("None")
+    const [userData, setUserData] = useState({})
     const [postResponse, setPostResponse] = useState({})
     const [selectTheme, setSelectTheme] = useState("themeOne")
     const {isExp, userId, fullName, email} = AuthVerification();
@@ -38,10 +39,18 @@ function Post () {
         theme: "themeOne",
         title: ""
     })
-
     useEffect(() => {
-        console.log(postResponse);
-    }, [postResponse])
+        if(userId){
+            axios.get(`${databaseApi}/users/profile/${userId}`)
+                .then(res => {
+                    setUserData(res.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+            
+    }, [userId])
 
     const postBlogBtn = async (e) => {
         e.preventDefault()
@@ -66,26 +75,33 @@ function Post () {
         formData.append("firstDescription", themeOnePostItem.firstDescription)
         formData.append("secondDescription", themeOnePostItem.secondDescription)
         formData.append("thirdDescription", themeOnePostItem.thirdDescription)
+         console.log("isVerified", userData[0].isVerified);
+        if(userData[0].isVerified){
+            console.log("Yea");
+            axios.post(`${databaseApi}/blog/post`, formData)
+                .then(res => {
+                    console.log(res);
+                    setThemeOnePostItem({
+                        BlogImageOne: "",
+                        BlogImageTwo: "",
+                        BlogImageThree: "",
+                        BlogImageFour: "",
+                        firstDescription: "",
+                        secondDescription: "",
+                        thirdDescription: "",
+                    })
+                    setBlogItem({
+                        theme: "themeOne",
+                        title: ""
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }else{
+            console.log("Not");
+        }
 
-        axios.post(`${databaseApi}/blog/post`, formData)
-            .then(res => {
-                console.log(res);
-                setThemeOnePostItem({
-                    BlogImageOne: "",
-                    BlogImageTwo: "",
-                    BlogImageThree: "",
-                    BlogImageFour: "",
-                    firstDescription: "",
-                    secondDescription: "",
-                    thirdDescription: "",
-                })
-                setBlogItem({
-                    title: ""
-                })
-            })
-            .catch(err => {
-                console.log(err);
-            })
     }
     return(
         <>
