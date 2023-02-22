@@ -3,8 +3,9 @@ import NavbarStyle from "./style.module.css"
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { AiOutlineUser, AiOutlineMenu } from 'react-icons/ai';
 import { RxCross2 } from 'react-icons/rx';
-import {Link} from "react-router-dom"
+import {Link, useLocation} from "react-router-dom"
 import AuthVerification from "../../../commonFunc/AuthVerification";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 function Navbar () {
     
@@ -14,6 +15,7 @@ function Navbar () {
     const [showSideNavbar, setShowSideNavbar] = useState(false)
     const [showSideNavbarDropdown, setShowSideNavbarDropdown] = useState(false)
     const {isExp, userId, fullName, email} = AuthVerification();
+    const location = useLocation()
 
     const logoutBtn = () => {
         localStorage.clear()
@@ -60,40 +62,43 @@ function Navbar () {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item bgColorLeftToRight mx-2" >
-                                <a className="nav-link" href="/">Home</a>
+                            <li className={`nav-item mx-2 d-flex align-items-center`} >
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/" && "bgColorLeftToRight"} bgColorLeftToRight`} to={"/"}>Home</Link>
                             </li>
-                            <li className="nav-item dropdown mx-2">
-                                <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button"onClick={() => setShowDropdown(!showDropdown)}>
-                                    Category
-                                </span>
-                                <ul className={`dropdown-menu ${NavbarStyle.dropdownBox} ${showDropdown? "d-block" : ""}`}>
-                                    <li><Link className="dropdown-item" to={"/category?c=standard"}>Standard</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=common"}>Common</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=treading"}>Treading</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=inspiration"}>Inspiration</Link></li>
-                                </ul>
+                            <li className={`nav-item mx-2 d-flex align-items-center ${NavbarStyle.dropdownList}`}>
+                                <Dropdown>
+                                    <Dropdown.Toggle className={`${NavbarStyle.dropdownTitle} fw-bold text-dark ${location.pathname === "/category" && ""} bgColorLeftToRight`} id="dropdown-basic">
+                                        Category
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=standard"}>Standard</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=common"}>Common</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=treading"}>Treading</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </li>
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={"/category"}>Popular</Link>
+                            <li className={`nav-item mx-2 d-flex align-items-center`}>
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/popular" && ""} bgColorLeftToRight`} to={"/popular"}>Popular</Link>
                             </li>
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={isExp ? "/post" : "/login"}>Post</Link>
+                            <li className={`nav-item mx-2 d-flex align-items-center`}>
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/post" && ""} bgColorLeftToRight`} to={isExp ? "/post" : "/login"}>Post</Link>
                             </li>
                             
                         </ul>
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item mx-2">
                                 { 
-                                    AuthVerification().isExp ? <Link className="nav-link" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
+                                    AuthVerification().isExp ? <Link className="nav-link bgColorTopToBottom" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
                                 }
                                 
                             </li>
-                            <li className="nav-item mx-2">
-                                <span className="nav-link" onClick={ () => setShowSearchPopup(true)}><BiSearchAlt2/></span>
+                            <li className="nav-item bgColorTopToBottom mx-2">
+                                <span className="nav-link pointer" onClick={ () => setShowSearchPopup(true)}><BiSearchAlt2/></span>
                             </li>
                             <li className="nav-item bgColorTopToBottom mx-2">
-                                <span className="nav-link" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
+                                <span className="nav-link pointer" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
                             </li>
                         </ul>
                     </div>
@@ -111,40 +116,43 @@ function Navbar () {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item bgColorLeftToRight mx-2" >
-                                <a className="nav-link" href="/">Home</a>
+                            <li className={`nav-item mx-2 d-flex align-items-center`} >
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/" && ""} bgColorLeftToRight`} to={"/"}>Home</Link>
                             </li>
-                            <li className="nav-item dropdown mx-2">
-                                <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button"onClick={() => setShowDropdown(!showDropdown)}>
-                                    Category
-                                </span>
-                                <ul className={`dropdown-menu ${NavbarStyle.dropdownBox} ${showDropdown? "d-block" : ""}`}>
-                                    <li><Link className="dropdown-item" to={"/category?c=standard"}>Standard</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=common"}>Common</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=treading"}>Treading</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=inspiration"}>Inspiration</Link></li>
-                                </ul>
+                            <li className={`nav-item mx-2 d-flex align-items-center ${NavbarStyle.dropdownList}`}>
+                                <Dropdown>
+                                    <Dropdown.Toggle className={`${NavbarStyle.dropdownTitle} fw-bold text-dark ${location.pathname === "/category" && ""} bgColorLeftToRight`} id="dropdown-basic">
+                                        Category
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=standard"}>Standard</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=common"}>Common</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=treading"}>Treading</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </li>
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={"/category"}>Popular</Link>
+                            <li className={`nav-item mx-2 d-flex align-items-center`}>
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/popular" && ""} bgColorLeftToRight`} to={"/popular"}>Popular</Link>
                             </li>
-                            <li className="nav-item mx-2">
-                                <Link className="nav-link" to={isExp ? "/post" : "/login"}>Post</Link>
+                            <li className={`nav-item mx-2 d-flex align-items-center`}>
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/post" && ""} bgColorLeftToRight`} to={isExp ? "/post" : "/login"}>Post</Link>
                             </li>
                             
                         </ul>
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item mx-2">
                                 { 
-                                    AuthVerification().isExp ? <Link className="nav-link" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
+                                    AuthVerification().isExp ? <Link className="nav-link bgColorTopToBottom" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
                                 }
                                 
                             </li>
-                            <li className="nav-item mx-2">
-                                <span className="nav-link" onClick={ () => setShowSearchPopup(true)}><BiSearchAlt2/></span>
+                            <li className="nav-item bgColorTopToBottom mx-2">
+                                <span className="nav-link pointer" onClick={ () => setShowSearchPopup(true)}><BiSearchAlt2/></span>
                             </li>
                             <li className="nav-item bgColorTopToBottom mx-2">
-                                <span className="nav-link" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
+                                <span className="nav-link pointer" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
                             </li>
                         </ul>
                     </div>
@@ -159,15 +167,18 @@ function Navbar () {
                         <ul className={NavbarStyle.sideNavLists}>
                             <li><a href="/">Home</a></li>
                             <li className="nav-item dropdown">
-                                <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button"onClick={() => setShowSideNavbarDropdown(!showSideNavbarDropdown)}>
-                                    Category
-                                </span>
-                                <ul className={`dropdown-menu ${NavbarStyle.dropdownBox} ${showSideNavbarDropdown? "d-block" : ""}`}>
-                                <li><Link className="dropdown-item" to={"/category?c=standard"}>Standard</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=common"}>Common</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=treading"}>Treading</Link></li>
-                                    <li><Link className="dropdown-item" to={"/category?c=inspiration"}>Inspiration</Link></li>
-                                </ul>
+                                <Dropdown>
+                                    <Dropdown.Toggle className={`${NavbarStyle.sideNavTitle} text-dark p-0`} id="dropdown-basic">
+                                        Category
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=standard"}>Standard</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=common"}>Common</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=treading"}>Treading</Link></Dropdown.Item>
+                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </li>
                             <li><Link to={"/category"}>Popular</Link></li>
                             <li><Link to={"/post"}>Post</Link></li>

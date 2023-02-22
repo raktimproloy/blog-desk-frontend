@@ -33,6 +33,8 @@ function Blog (){
     const queryParams = new URLSearchParams(search)
     const blogId = queryParams.get("id")
 
+    
+
     useEffect(() => {
         axios.get(`${databaseApi}/blog/${blogId}`)
             .then(res => {
@@ -44,6 +46,7 @@ function Blog (){
             })
             
     }, [count])
+
     useEffect(() => {
         const userId = blogData.author
         console.log(userId === undefined);
@@ -58,6 +61,28 @@ function Blog (){
         }
         
         
+    }, [blogData])
+
+    const ratingCount = (clicked) => {
+        console.log(blogData);
+    }
+
+    useEffect(() => {
+        if(blogData._id !== undefined){
+            console.log(blogData);
+            let sessionBlogsId = JSON.parse(sessionStorage.getItem("blogs"))
+            if(sessionBlogsId){
+                if(!sessionBlogsId.includes(blogId)){
+                    ratingCount(blogData)
+                    sessionStorage.setItem("blogs", JSON.stringify([...sessionBlogsId, blogId]))
+                }else{
+                    console.log("Acha");
+                }
+            }else{
+                ratingCount(blogData)
+                sessionStorage.setItem("blogs", JSON.stringify([blogId]))
+            }
+        }
     }, [blogData])
 
     const getUserData = (userId) => {

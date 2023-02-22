@@ -1,13 +1,21 @@
 import React, {useContext, useEffect, useState} from "react";
 import SignupStyle from "./style.module.css"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import ContextApi from "../../../ContextApi/ContextApi";
+
 import axios from "axios"
 
 function Signup() {
+    const navigate = useNavigate()
     const {databaseApi} = useContext(ContextApi);
     const [backendRes, setBackendRes] = useState("")
     const [inputFieldValid, setInputFieldValid] = useState("")
+
+    const [alert, setAlert] = useState(false)
+    const print = {
+        topic: true,
+        text: "Your profile updated."
+    }
 
 
     const [userSignupData, setUserSignupData] = useState({
@@ -28,62 +36,64 @@ function Signup() {
 
     const handlePhoto = (e) => {
         setUserSignupData({...userSignupData, profileImage: e.target.files[0]})
-        console.log(userSignupData.profileImage);
     }
     const handleCheckbox = (e) => {
         setUserSignupData({...userSignupData, policyAgree: e.target.checked})
-        console.log(e.target.checked);
     }
 
 
     
     const signupBtn = (e) => {
         e.preventDefault()
-        console.log(inputFieldValid);
-        console.log(userSignupData);
         setInputFieldValid("")
+        setBackendRes("")
 
         if(userSignupData.fullName !== ""){
             if(userSignupData.email !== ""){
-                if(userSignupData.password !== ""){
-                    if(userSignupData.password === userSignupData.confirmPassword){
-                        if(userSignupData.policyAgree === true){
-
-                            const formData = new FormData()
-                            formData.append("profileImage", userSignupData.profileImage)
-                            formData.append("fullName", userSignupData.fullName)
-                            formData.append("about", userSignupData.about)
-                            formData.append("email", userSignupData.email)
-                            formData.append("password", userSignupData.password)
-                            formData.append("facebook", userSignupData.facebook)
-                            formData.append("twitter", userSignupData.twitter)
-                    
-                            axios.post(`${databaseApi}/users/signup`, formData)
-                            .then(res => {
-                                console.log(res.data);
-                                setBackendRes(res.data)
-                                setUserSignupData({
-                                    fullName: "",
-                                    email: "",
-                                    password: "",
-                                    confirmPassword: "",
-                                    profileImage: "",
-                                    policyAgree: false
+                if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userSignupData.email)){
+                    if(userSignupData.password !== ""){
+                        if(userSignupData.password === userSignupData.confirmPassword){
+                            if(userSignupData.policyAgree === true){
+    
+                                const formData = new FormData()
+                                formData.append("profileImage", userSignupData.profileImage)
+                                formData.append("fullName", userSignupData.fullName)
+                                formData.append("about", userSignupData.about)
+                                formData.append("email", userSignupData.email)
+                                formData.append("password", userSignupData.password)
+                                formData.append("facebook", userSignupData.facebook)
+                                formData.append("twitter", userSignupData.twitter)
+                        
+                                axios.post(`${databaseApi}/users/signup`, formData)
+                                .then(res => {
+                                    setInputFieldValid("")
+                                    setBackendRes(res.data)
+                                    setAlert(true)
+                                    setUserSignupData({
+                                        fullName: "",
+                                        email: "",
+                                        password: "",
+                                        confirmPassword: "",
+                                        profileImage: "",
+                                        policyAgree: false
+                                    })
+                                    navigate("/login",{state:{created:'success'}})
+                                    
                                 })
-                                setInputFieldValid("")
-                            })
-                            .catch(err => {
-                                console.log(err.response.data);
-                                setBackendRes(err.response.data)
-                            })
+                                .catch(err => {
+                                    setBackendRes(err.response.data)
+                                })
+                            }else{
+                                setInputFieldValid("policy error")
+                            }
                         }else{
-                            setInputFieldValid("policy error")
+                            setInputFieldValid("password not matched")
                         }
                     }else{
-                        setInputFieldValid("password not matched")
+                        setInputFieldValid("Empty password")
                     }
                 }else{
-                    setInputFieldValid("Empty password")
+                    setInputFieldValid("invalid Email")
                 }
             }else{
                 setInputFieldValid("Empty email")
@@ -93,25 +103,15 @@ function Signup() {
         }
     }
 
-    useEffect(() => {
-        console.log(backendRes);
-        console.log(backendRes.indexOf("is invalid"));
-    }, [backendRes])
-
     return(
         <>
+        
             <div className={SignupStyle.goHome}>
                 <Link className="bgColorLeftToRight py-3" to={"/"}>Go Home</Link>
             </div>
             <div className={`${SignupStyle.containerPosition}`}>
                 <div className={`${SignupStyle.containerMain}`}>
                     <h1 className="text-center">Signup</h1>
-                    {
-                        backendRes !== "" ?
-                        backendRes === "Signup Successful" ?
-                        <p className="text-center py-1 text-success">Signup successful</p> : 
-                        "" : ""
-                    }
                     
                     <form autoComplete="off" onSubmit={signupBtn} encType="multipart/form-data">
 
@@ -134,14 +134,12 @@ function Signup() {
                                <div className="form-text errorOne">Input your email</div>
                             }
                             {
-                                backendRes !== "" && backendRes !== "Empty email" ?
-                               backendRes.indexOf("is invalid") < 0 ?
+                                inputFieldValid === "invalid Email" ?
                                <div className="form-text errorOne">Invalid Email</div> : ""
-                               : ""
                             }
                             {
                                 backendRes !== "" && backendRes !== "Empty email" ?
-                               backendRes.indexOf("duplicate key error collection") < 0 ?
+                               backendRes === "Email already used" ?
                                <div className="form-text errorOne">Your email already used</div> : ""
                                : ""
                             }

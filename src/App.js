@@ -2,6 +2,7 @@ import Home from "./components/Pages/Home/Home"
 import Signup from "./components/Pages/Signup/Signup";
 import Login from "./components/Pages/Login/Login";
 import Category from "./components/Pages/Category/Category"
+import Popular from "./components/Pages/Popular/Popular";
 import Blog from "./components/Pages/Blog/Blog"
 import Post from "./components/Pages/Post/Post";
 import Profile from "./components/Pages/Profile/Profile";
@@ -22,6 +23,7 @@ function App() {
         <Route path="signup" element={ <Signup/> } />
         <Route path="login" element={ <Login/> } />
         <Route path="category" element={ <Category/> } />
+        <Route path="popular" element={ <Popular/> } />
         <Route path="blog" element={ <Blog/> } />
           <Route element={<ProtectedRoutes/>}>
             <Route path="/post" element={<Post/>} />

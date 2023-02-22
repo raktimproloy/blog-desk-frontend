@@ -1,16 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import LoginStyle from "./style.module.css";
-import {Link, useNavigate} from "react-router-dom"
+import {Link, useLocation, useNavigate} from "react-router-dom"
 import ContextApi from "../../../ContextApi/ContextApi";
+import MessageAlert from "../../Sections/MessageAlert/MessageAlert"
 
 function Login () {
     const navigate = useNavigate();
+    const location = useLocation()
     const {databaseApi} = useContext(ContextApi)
     const [loginResponse, setLoginResponse] = useState({})
     const [userLoginData, setUserLoginData] = useState({
         email: "",
         password: ""
     })
+
+    // MessageAlert
+    const [alert, setAlert] = useState(false)
+    const print = {
+        topic: true,
+        text: "Your account was created.."
+    }
+
+    useEffect(() => {
+        if(location?.state?.created === "success"){
+            setAlert(true)
+        }
+    }, [])
 
     useEffect(() => {
         if(loginResponse.message === "Login Successful"){
@@ -36,6 +51,8 @@ function Login () {
 
     return(
         <>
+        {/* Message Alert */}
+        <MessageAlert alert={alert} setAlert={setAlert} print={print} />
             <div className={LoginStyle.goHome}>
                 <Link className="bgColorLeftToRight py-3" to={"/"}>Go Home</Link>
             </div>

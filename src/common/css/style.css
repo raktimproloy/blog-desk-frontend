@@ -73,21 +73,22 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .bgColorLeftToRight{
-    color: #fff;
-    padding: 0px 30px;
+    /* color: #fff; */
+    padding: 5px 30px !important;
     background: #fe4f70;
     background: -webkit-linear-gradient(left,#fe4f70 0%,#ffa387 51%,#fe4f70 100%);
     background: linear-gradient(to right,#fe4f70 0%,#ffa387 51%,#fe4f70 100%);
     background-size: 200% auto;
     border-radius: 20px;
     transition: all .2s ease-in-out;
+    box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 15%);
 }
 .bgColorLeftToRight:hover{
     background-position: right center;
 }
 
 .bgColorTopToBottom{
-    color: #fff;
+    /* color: #fff; */
     border: 0;
     border-radius: 50%;
     background: #ffa387;

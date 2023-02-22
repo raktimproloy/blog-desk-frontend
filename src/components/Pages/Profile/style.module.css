@@ -4,6 +4,9 @@
 .profileIcons li{
     font-size: 22px;
 }
+.profileImage{
+    outline: 4px solid #ff214a;
+}
 .profileDetailsContainer{
     width: 100%;
     margin-top: 5%;

@@ -14,6 +14,7 @@ import ThemeThreeImage from "../../../images/themeImage/themeThree.png"
 import ThemeFourImage from "../../../images/themeImage/themeFour.png"
 import ContextApi from "../../../ContextApi/ContextApi";
 import AuthVerification from "../../../commonFunc/AuthVerification";
+import MessageAlert from "../../Sections/MessageAlert/MessageAlert"
 
 function Post () {
     const pageHeadingDetails = {
@@ -39,6 +40,14 @@ function Post () {
         theme: "themeOne",
         title: ""
     })
+
+    // MessageAlert
+    const [alert, setAlert] = useState(false)
+    const print = {
+        topic: true,
+        text: "Your blog was posted.."
+    }
+
     useEffect(() => {
         if(userId){
             axios.get(`${databaseApi}/users/profile/${userId}`)
@@ -80,7 +89,7 @@ function Post () {
             console.log("Yea");
             axios.post(`${databaseApi}/blog/post`, formData)
                 .then(res => {
-                    console.log(res);
+                    setAlert(true)
                     setThemeOnePostItem({
                         BlogImageOne: "",
                         BlogImageTwo: "",
@@ -105,6 +114,8 @@ function Post () {
     }
     return(
         <>
+        {/* Message alert */}
+            <MessageAlert alert={alert} setAlert={setAlert} print={print} />
             <Navbar/>
             <PageHeading pageHeadingDetails={pageHeadingDetails} />
             <div className="container py-5 d-flex justify-content-between">

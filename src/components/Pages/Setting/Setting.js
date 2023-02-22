@@ -6,6 +6,7 @@ import User from "./UserSetting/UserSetting"
 import Image from './ImageSetting/ImageSetting';
 import ContextApi from "../../../ContextApi/ContextApi";
 import Footer from "../../Sections/Footer/Footer"
+import MessageAlert from '../../Sections/MessageAlert/MessageAlert';
 import axios from "axios"
 import { RxCross2 } from 'react-icons/rx';
 import { useLocation } from "react-router-dom";
@@ -18,11 +19,19 @@ const Setting = () => {
     const [updateProfile, setUpdateProfile] = useState({})
     const [presentImage, setPresentImage] = useState("")
     const [popup, setPopup] = useState(false)
-    const [popupPassword, setPopupPassword] = useState(true)
+    const [popupPassword, setPopupPassword] = useState(false)
     const [updated, setUpdated] = useState("")
+    const [updatedError, setUpdatedError] = useState("")
     const [otp, setOtp] = useState("")
     const [checkOtp, setCheckOtp] = useState(true)
+    const [render, setRender] = useState(false)
     const {databaseApi} = useContext(ContextApi)
+    // alert message
+    const [alert, setAlert] = useState(false)
+    const print = {
+        topic: true,
+        text: "Your profile updated."
+    }
     
     const {search} = useLocation()
     const queryParams = new URLSearchParams(search)
@@ -39,10 +48,12 @@ const Setting = () => {
                 console.log(err);
             })
             
-    }, [updated, checkOtp])
-
-    const handleUpdate = () => {
-        console.log(updateProfile);
+    }, [updated, render])
+    
+    const handlePassword = (e) => {
+        e.preventDefault()
+        console.log("password",updateProfile);
+        
         const formData = new FormData()
 
         formData.append("profileImage", updateProfile.profileImage)
@@ -52,16 +63,26 @@ const Setting = () => {
         formData.append("password", updateProfile.password)
         formData.append("facebook", updateProfile.facebook)
         formData.append("twitter", updateProfile.twitter)
-
+        
 
         axios.put(`${databaseApi}/users/update/${userId}`, formData)
         .then(res => {
             console.log(res);
             setUpdated("updated")
+            setPopupPassword(false)
+            setAlert(true)
         })
         .catch(err => {
-            console.log(err);
+            console.log(err.response.data.error);
+            setUpdatedError(err.response.data.error)
         })
+        
+    }
+
+    const handleUpdate = () => {
+        setPopupPassword(true)
+        setUpdateProfile({...updateProfile, password: ""})
+        console.log("setting",updateProfile);
     }
 
     const handleOtpSubmit = (e) => {
@@ -73,6 +94,7 @@ const Setting = () => {
             setCheckOtp(true)
             setPopup(false)
             console.log("Success", res);
+            setRender(!render)
         })
         .catch(err => {
             console.log("Error",err);
@@ -81,6 +103,8 @@ const Setting = () => {
     }
   return (
     <>
+    {/* Message alert Popup */}
+    <MessageAlert alert={alert} setAlert={setAlert} print={print} />
     {/* Pop up for otp verification */}
         <div className={`${settingStyle.inputOtp} ${!popup && settingStyle.inputOtpClose}`}>
             <p className={settingStyle.searchPopupClose} onClick={() => {setPopup(false);
@@ -98,15 +122,16 @@ const Setting = () => {
 
         {/* pop up for password verification */}
         <div className={`${settingStyle.inputOtp} ${!popupPassword && settingStyle.inputOtpClose}`}>
-            <p className={settingStyle.searchPopupClose} onClick={() => {setPopup(false);
-                                                                        setOtp("");
-                                                                        setCheckOtp(true)}} ><RxCross2/></p>
+            <p className={settingStyle.searchPopupClose} onClick={() => {setPopupPassword(false);
+                                                                        setUpdateProfile({...updateProfile, password: ""})
+                                                                        }} ><RxCross2/></p>
             <form>
-                <p className={`${settingStyle.verifyPopupErrorText} ${!checkOtp ? "d-block" : "d-none"} `}>Invalid Password</p>
+                <p className={`${settingStyle.verifyPopupErrorText} ${updatedError === "Authentication Error!" ? "d-block" : "d-none"} `}>Invalid Password</p>
+                <p className={`${settingStyle.verifyPopupErrorText} ${updatedError === "Id not verified!" ? "d-block" : "d-none"} `}>User not verified</p>
                 <h5 className='text-white mb-3'>Input your password</h5>
-                <input type="password" onChange={(e) => setOtp(e.target.value)} value={otp || ""} className={`${settingStyle.otpInput} inputStyle`} />
+                <input type="password" onChange={(e) => setUpdateProfile({...updateProfile, password: e.target.value})} value={updateProfile.password || ""} className={`${settingStyle.otpInput} inputStyle`} />
                 <div className='text-center'>
-                    <input type="submit" onClick={handleOtpSubmit} className="bgColorLeftToRight py-2" value="Done" />
+                    <input type="submit" onClick={handlePassword} className="bgColorLeftToRight py-2" value="Done" />
                 </div>
             </form>
         </div>
