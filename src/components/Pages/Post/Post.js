@@ -86,7 +86,7 @@ function Post () {
         formData.append("thirdDescription", themeOnePostItem.thirdDescription)
          console.log("isVerified", userData[0].isVerified);
         if(userData[0].isVerified){
-            console.log("Yea");
+            console.log("Yea", themeOnePostItem.firstDescription);
             axios.post(`${databaseApi}/blog/post`, formData)
                 .then(res => {
                     setAlert(true)

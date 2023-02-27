@@ -18,7 +18,9 @@ export const Popular = () => {
     useEffect(() => {
         axios.get(`${databaseApi}/blog/blogs/all`)
             .then(res => {
-                setAllBlogs(res.data)
+                const sortData = res.data.sort(
+                    (p1, p2) => (p1.ratingPoint < p2.ratingPoint) ? 1 : (p1.ratingPoint > p2.ratingPoint) ? -1 : 0);
+                setAllBlogs(sortData)
             })
             .catch(err => {
                 console.log(err);
@@ -34,9 +36,9 @@ export const Popular = () => {
                 <div className={`leftSectionContainer`}>
                     <div>
                         <div>
-                            {/* {allBlogs.map(blog => 
-                                // blog.category.toLowerCase() === category && <BlogStyleThree blogData={blog} key={blog._id}/>
-                                )} */}
+                            {allBlogs.map(blog => 
+                                <BlogStyleThree blogData={blog} key={blog._id}/>
+                            )}
                             {console.log(allBlogs)}
                         </div>
                     </div>

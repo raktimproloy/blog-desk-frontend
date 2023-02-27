@@ -45,7 +45,7 @@ function Blog (){
                 console.log(err);
             })
             
-    }, [count])
+    }, [count, isLiked])
 
     useEffect(() => {
         const userId = blogData.author
@@ -58,29 +58,91 @@ function Blog (){
                     setIsLiked(true)
                 }
             })
-        }
-        
-        
+        } 
     }, [blogData])
 
+    const updateRating = (updatedBlog) => {
+        axios.put(`${databaseApi}/blog/update/${blogId}`, updatedBlog)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     const ratingCount = (clicked) => {
-        console.log(blogData);
+        setTimeout(() => {
+            const like = blogData.likes.length
+            const comment = blogData.comments.length
+            const view = blogData.views
+            if(clicked === "view"){
+                const ratingCalculation = ((like + comment) * 100) / view + 1
+                const updatedBlog = {
+                    ratingPoint: Math.round(ratingCalculation)
+                }
+                updateRating(updatedBlog)
+            }else if(clicked === "like"){
+                const ratingCalculation = ((like + 1 + comment) * 100) / view
+                const updatedBlog = {
+                    ratingPoint: Math.round(ratingCalculation)
+                }
+                updateRating(updatedBlog)
+            }else if(clicked === "dislike"){
+                const ratingCalculation = ((like - 1 + comment) * 100) / view
+                const updatedBlog = {
+                    ratingPoint: Math.round(ratingCalculation)
+                }
+                updateRating(updatedBlog)
+            }else if(clicked === "comment"){
+                const ratingCalculation = ((like + comment + 1) * 100) / view
+                const updatedBlog = {
+                    ratingPoint: Math.round(ratingCalculation)
+                }
+                updateRating(updatedBlog)
+            }
+            
+        }, 1000);
     }
 
     useEffect(() => {
         if(blogData._id !== undefined){
-            console.log(blogData);
             let sessionBlogsId = JSON.parse(sessionStorage.getItem("blogs"))
             if(sessionBlogsId){
                 if(!sessionBlogsId.includes(blogId)){
-                    ratingCount(blogData)
+                    
                     sessionStorage.setItem("blogs", JSON.stringify([...sessionBlogsId, blogId]))
+                    const previousViews = {
+                        views: blogData.views + 1
+                    }
+                    console.log("Ai re sala");
+                    axios.put(`${databaseApi}/blog/views/${blogId}`, previousViews)
+                        .then(res => {
+                            console.log(res);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        })
+                    ratingCount("view")
                 }else{
                     console.log("Acha");
                 }
             }else{
-                ratingCount(blogData)
+                
                 sessionStorage.setItem("blogs", JSON.stringify([blogId]))
+
+                const previousViews = {
+                    views: blogData.views + 1
+                }
+                console.log("Ai re sala");
+                axios.put(`${databaseApi}/blog/views/${blogId}`, previousViews)
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                ratingCount("view")
             }
         }
     }, [blogData])
@@ -106,10 +168,13 @@ function Blog (){
                     console.log(res);
                     setIsLiked(!isLiked)
                     console.log("Why click",userId.clickFor);
+                    
                     if(userId.clickFor === "dislike"){
                         setCountLike(countLike - 1)
+                        ratingCount("dislike")
                     }else{
                         setCountLike(countLike + 1) 
+                        ratingCount("like")
                     }
                 })
                 .catch(err => {
@@ -138,6 +203,7 @@ function Blog (){
                         console.log(res);
                         setCount(count+ 1)
                         setComment("")
+                        ratingCount("comment")
                     })
                     .catch(err => {
                         console.log(err);
