@@ -1,5 +1,8 @@
 import React from 'react'
 import FooterStyle from "./style.module.css"
+import { BsFacebook, BsLinkedin } from 'react-icons/bs';
+import { AiFillInstagram, AiFillTwitterCircle} from 'react-icons/ai';
+import { ImYoutube} from 'react-icons/im';
 
 function Footer() {
   return (
@@ -7,15 +10,14 @@ function Footer() {
         <div className={`container`} >
             <div className='d-flex justify-content-between align-items-center'>
                 <p>© 2023 BlogDesk, made by Raktim</p>
-                <ul className='d-flex justify-content-between m-0'>
-                    <li>facebook</li>
-                    <li>twitter</li>
-                    <li>gmail</li>
-                    <li>youtube</li>
-                    <li>instagram</li>
-                    <li>linkdin</li>
+                <ul className={`d-flex justify-content-between align-items-center m-0 ${FooterStyle.footerIconsContainer}`}>
+                    <li><BsFacebook className="pointer" /></li>
+                    <li><BsLinkedin className="pointer"/></li>
+                    <li><AiFillInstagram className="pointer"/></li>
+                    <li><AiFillTwitterCircle className="pointer"/></li>
+                    <li><ImYoutube className="pointer"/></li>
                 </ul>
-                <p>Go to Top</p>
+                <p className='bgColorLeftToRight text-dark pointer'>Go to Top</p>
             </div>
         </div>
     </div>

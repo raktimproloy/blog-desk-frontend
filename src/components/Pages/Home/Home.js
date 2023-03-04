@@ -28,6 +28,7 @@ function Home() {
     useEffect(() => {
         axios.get(`${databaseApi}/blog/blogs/all`)
             .then(res => {
+                console.log(res.data.reverse());
                 setAllBlogs(res.data.reverse())
             })
             .catch(err => {
@@ -66,11 +67,11 @@ function Home() {
                 <div className={`leftSectionContainer`}>
                     <div>
                         <h3 className="mb-4 animateUnderline">Standard Blog</h3>
-                        <div className="defaultBorder d-flex justify-content-between p-2 mb-5">
-                            <div className={`p-3 ${HomeStyle.standardBlogRightPart}`}>
+                        <div className="defaultBorder row p-2 mb-5">
+                            <div className={`p-4 col-md-6 ${HomeStyle.standardBlogRightPart}`}>
                                 <BlogStyleTwo blogData={standardBlog[0]} />
                             </div>
-                            <div className={`p-4 ${HomeStyle.standardBlogLeftPart}`}>
+                            <div className={`p-4 col-md-6 ${HomeStyle.standardBlogLeftPart}`}>
                                 <BlogStyleOne blogData={standardBlog[1]}/>
                                 <BlogStyleOne blogData={standardBlog[2]}/>
                                 <BlogStyleOne blogData={standardBlog[3]}/>
@@ -80,15 +81,15 @@ function Home() {
                     </div>
                     <div>
                         <h3 className="mb-4 animateUnderline">Common Blog</h3>
-                        <div className="defaultBorder d-flex justify-content-between p-2 mb-5">
-                            <div className={`p-3 ${HomeStyle.standardBlogRightPart}`}>
+                        <div className="defaultBorder d-flex justify-content-between row p-2 mb-5">
+                            <div className={`p-3 col-md-6 ${HomeStyle.standardBlogRightPart}`}>
                                 <div className="mb-4">
                                     <BlogStyleTwo blogData={commonBlog[0]} />
                                 </div>
                                 <BlogStyleOne blogData={commonBlog[2]} />
                                 <BlogStyleOne blogData={commonBlog[4]} />
                             </div>
-                            <div className={`p-3 ${HomeStyle.standardBlogLeftPart}`}>
+                            <div className={`p-3 col-md-6 ${HomeStyle.standardBlogLeftPart}`}>
                                 <div className="mb-4">
                                     <BlogStyleTwo blogData={commonBlog[1]} />
                                 </div>

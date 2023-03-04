@@ -44,8 +44,8 @@ function BlogStyleTwo({blogData}) {
                 <p className={`${BlogStyleCss.blogTwoPostedTime} text-end`}>{data?.postedTime}</p>
             </div>
             <h4 className="pointer" onClick={clickBlog}>{data?.title}</h4>
-            <p className={`mb-2 meta`}>{data?.firstDescription?.slice(0, 135)}{data?.firstDescription?.length > 135 && <span> ...</span>}</p>
-            {data?.firstDescription?.length > 135 && <p className="pointer" onClick={clickBlog}><u>See more</u></p>}
+            <p className={`mb-2 meta`}>{data?.firstDescription?.split("\n")[0].slice(0, 135)}{data?.firstDescription?.length > 135 ? <span> ...</span> : <span> ...</span>}</p>
+            {data?.firstDescription?.length > 135 ? <p className="pointer" onClick={clickBlog}><u>See more</u></p> : <p className="pointer" onClick={clickBlog}><u>See more</u></p> }
             
         </div>
     )

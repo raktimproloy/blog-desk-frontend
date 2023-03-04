@@ -8,7 +8,14 @@ function ThemeOne({blogData}) {
         <>
             <div>
                 <img src={`${databaseApi}/${blogData.BlogImageOne}`} alt="Blog" className={themeFourStyle.firstImage} />
-                <p className={themeFourStyle.descriptionText}>{blogData.firstDescription}</p>
+                <p className={themeFourStyle.descriptionText}>{blogData.firstDescription.split("\n").map((line, j) => {
+                    return (
+                        <React.Fragment key={`line-${j}`}>
+                        {line}
+                        <br/>
+                        </React.Fragment>
+                    )
+                })}</p>
             </div>
         </>
     )

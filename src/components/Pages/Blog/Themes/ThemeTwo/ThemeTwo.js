@@ -8,10 +8,24 @@ function ThemeTwo({blogData}) {
         <>
             <div>
                 <img src={`${databaseApi}/${blogData.BlogImageOne}`} alt="Blog" className={themeFourStyle.firstImage} />
-                <p className={themeFourStyle.descriptionText}>{blogData.firstDescription}</p>
+                <p className={themeFourStyle.descriptionText}>{blogData.firstDescription.split("\n").map((line, j) => {
+                    return (
+                        <React.Fragment key={`line-${j}`}>
+                        {line}
+                        <br/>
+                        </React.Fragment>
+                    )
+                })}</p>
 
                 <img src={`${databaseApi}/${blogData.BlogImageTwo}`} alt="Blog" className={themeFourStyle.secondImage} />
-                <p className={themeFourStyle.descriptionText}>{blogData.secondDescription}</p>
+                <p className={themeFourStyle.descriptionText}>{blogData.secondDescription.split("\n").map((line, j) => {
+                    return (
+                        <React.Fragment key={`line-${j}`}>
+                        {line}
+                        <br/>
+                        </React.Fragment>
+                    )
+                })}</p>
             </div>
         </>
     )

@@ -9,7 +9,7 @@ function ThemeInputsThree ({themeOnePostItem, setThemeOnePostItem}) {
             <div className="py-3">
                 <div>
                     <p>First Image</p>
-                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageOne" onChange={photoChange} value={themeOnePostItem.BlogImageOne || ""} />
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageOne" onChange={photoChange} />
                 </div>
                 <div>
                     <p>First Description:</p>
@@ -19,7 +19,7 @@ function ThemeInputsThree ({themeOnePostItem, setThemeOnePostItem}) {
             <div>
                 <div>
                     <p>Second Image</p>
-                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageTwo" onChange={photoChange} value={themeOnePostItem.BlogImageTwo || ""} />
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageTwo" onChange={photoChange} />
                 </div>
                 <div>
                     <p>Second Description:</p>
@@ -29,7 +29,7 @@ function ThemeInputsThree ({themeOnePostItem, setThemeOnePostItem}) {
             <div>
                 <div>
                     <p>Third Image</p>
-                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageThree" onChange={photoChange} value={themeOnePostItem.BlogImageThree || ""} />
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageThree" onChange={photoChange} />
                 </div>
                 <div>
                     <p>Third Description:</p>
