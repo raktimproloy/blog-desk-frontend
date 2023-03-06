@@ -7,7 +7,7 @@ import ContextApi from './ContextApi/ContextApi';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const API_Base = "http://localhost:3001"
+const API_Base = "https://blog-desk.onrender.com"
 root.render(
   <BrowserRouter>
   <ContextApi.Provider value={{databaseApi: API_Base}}>
