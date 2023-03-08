@@ -10,6 +10,7 @@ function Signup() {
     const {databaseApi} = useContext(ContextApi);
     const [backendRes, setBackendRes] = useState("")
     const [inputFieldValid, setInputFieldValid] = useState("")
+    const secrectCode = "1234"
 
     const [alert, setAlert] = useState(false)
     const print = {
@@ -19,6 +20,7 @@ function Signup() {
 
 
     const [userSignupData, setUserSignupData] = useState({
+        secrectCode: secrectCode,
         fullName: "",
         about: "",
         email: "",
@@ -63,6 +65,7 @@ function Signup() {
                                 formData.append("password", userSignupData.password)
                                 formData.append("facebook", userSignupData.facebook)
                                 formData.append("twitter", userSignupData.twitter)
+                                formData.append("secrectCode", userSignupData.secrectCode)
                         
                                 axios.post(`${databaseApi}/users/signup`, formData)
                                 .then(res => {
