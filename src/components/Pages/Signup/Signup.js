@@ -20,13 +20,13 @@ function Signup() {
 
     const [userSignupData, setUserSignupData] = useState({
         fullName: "",
-        about: "I love blogger",
+        about: "",
         email: "",
         password: "",
         confirmPassword: "",
         profileImage: "",
-        facebook: "facebook",
-        twitter: "twitter",
+        facebook: "",
+        twitter: "",
         policyAgree: false
     })
 
@@ -105,7 +105,6 @@ function Signup() {
 
     return(
         <>
-        
             <div className={SignupStyle.goHome}>
                 <Link className="bgColorLeftToRight py-3" to={"/"}>Go Home</Link>
             </div>
@@ -139,7 +138,7 @@ function Signup() {
                             }
                             {
                                 backendRes !== "" && backendRes !== "Empty email" ?
-                               backendRes === "Email already used" ?
+                               backendRes.error === "Email already used" ?
                                <div className="form-text errorOne">Your email already used</div> : ""
                                : ""
                             }

@@ -15,17 +15,19 @@ const User = ({userData}) => {
     
     return(
         <>
+        {console.log("User Data",userData)}
             <div className={`d-flex justify-content-center align-items-center mb-4 ${ProfileStyle.profileNameImage}`} >
-                <img src={`${databaseApi}/${userData?.profileImage}`} alt="portfolio" className={ProfileStyle.profileImage} />
+                {/* <img src={`${databaseApi}/${userData?.profileImage}`} alt="portfolio" className={ProfileStyle.profileImage} /> */}
+                <img src={`${userData?.profileImage}`} alt="portfolio" className={ProfileStyle.profileImage} />
                 <h1>{userData?.fullName}</h1>
             </div>
             <div>
                 <p>{userData?.about}</p>
                 <ul className={`d-flex justify-content-start align-items-center mt-3 ${ProfileStyle.profileIcons}`}>
-                    {userData?.facebook !== "undefined" && <li className="me-3" onClick={() => handleFacebook("facebook")}><BsFacebook/></li>}
+                    {userData?.facebook !== "" && <li className="me-3" onClick={() => handleFacebook("facebook")}><BsFacebook/></li>}
                     {/* <li className="me-3"><BsLinkedin/></li>
                     <li className="me-3"><AiFillInstagram/></li> */}
-                    {userData?.twitter !== "undefined" && <li className="me-3"><AiFillTwitterCircle/></li>}
+                    {userData?.twitter !== "" && <li className="me-3"><AiFillTwitterCircle/></li>}
                 </ul>
             </div>
         </>

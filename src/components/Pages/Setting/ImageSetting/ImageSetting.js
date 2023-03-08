@@ -9,7 +9,7 @@ const ImageSetting = ({databaseApi, updateProfile, setUpdateProfile, presentImag
   return (
     <>
       <div className='text-center'>
-        <img src={`${databaseApi}/${presentImage}`} alt='profile' className={`${settingStyle.settingProfileImage} mb-3`} />
+        <img src={`${presentImage}`} alt='profile' className={`${settingStyle.settingProfileImage} mb-3`} />
         <p className='textColor1'>Upload your profile picture in 1mb.</p>
         <input type="file" className="form-control mb-3" name="profileImage" autoComplete="off" onChange={handlePhoto} />
         {/* <div>
