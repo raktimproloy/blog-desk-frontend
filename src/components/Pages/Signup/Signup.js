@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom"
 import ContextApi from "../../../ContextApi/ContextApi";
 
 import axios from "axios"
-var CryptoJS = require("crypto-js")
+// var CryptoJS = require("crypto-js")
 
 function Signup() {
 
@@ -66,9 +66,9 @@ function Signup() {
                                 formData.append("facebook", userSignupData.facebook)
                                 formData.append("twitter", userSignupData.twitter)
                                 
-                                var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(userSignupData), 'my-secret-key@123').toString();
-                                const postData = {userSignupData: ciphertext}
-                                axios.post(`${databaseApi}/users/signup`, postData)
+                                // var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(userSignupData), 'my-secret-key@123').toString();
+                                // const postData = {userSignupData: ciphertext}
+                                axios.post(`${databaseApi}/users/signup`, formData)
                                 .then(res => {
                                     setInputFieldValid("")
                                     setBackendRes(res.data)
