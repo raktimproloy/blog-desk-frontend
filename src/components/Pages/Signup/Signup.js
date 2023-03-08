@@ -4,13 +4,14 @@ import {Link, useNavigate} from "react-router-dom"
 import ContextApi from "../../../ContextApi/ContextApi";
 
 import axios from "axios"
+var CryptoJS = require("crypto-js")
 
 function Signup() {
+
     const navigate = useNavigate()
     const {databaseApi} = useContext(ContextApi);
     const [backendRes, setBackendRes] = useState("")
     const [inputFieldValid, setInputFieldValid] = useState("")
-    const secrectCode = "1234"
 
     const [alert, setAlert] = useState(false)
     const print = {
@@ -20,7 +21,6 @@ function Signup() {
 
 
     const [userSignupData, setUserSignupData] = useState({
-        secrectCode: secrectCode,
         fullName: "",
         about: "",
         email: "",
@@ -29,7 +29,7 @@ function Signup() {
         profileImage: "",
         facebook: "",
         twitter: "",
-        policyAgree: false
+        policyAgree: false,
     })
 
     const handleChange = (e) => {
@@ -65,9 +65,10 @@ function Signup() {
                                 formData.append("password", userSignupData.password)
                                 formData.append("facebook", userSignupData.facebook)
                                 formData.append("twitter", userSignupData.twitter)
-                                formData.append("secrectCode", userSignupData.secrectCode)
-                        
-                                axios.post(`${databaseApi}/users/signup`, formData)
+                                
+                                var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(userSignupData), 'my-secret-key@123').toString();
+                                const postData = {userSignupData: ciphertext}
+                                axios.post(`${databaseApi}/users/signup`, postData)
                                 .then(res => {
                                     setInputFieldValid("")
                                     setBackendRes(res.data)
