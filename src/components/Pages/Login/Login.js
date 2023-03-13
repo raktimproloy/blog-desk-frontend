@@ -3,6 +3,7 @@ import LoginStyle from "./style.module.css";
 import {Link, useLocation, useNavigate} from "react-router-dom"
 import ContextApi from "../../../ContextApi/ContextApi";
 import MessageAlert from "../../Sections/MessageAlert/MessageAlert"
+import Loading from "../../Sections/Loading/Loading";
 import {useCookies} from "react-cookie"
 
 function Login () {
@@ -26,6 +27,10 @@ function Login () {
         text: "Your account was created.."
     }
 
+    // Loading Alert
+    const [loading, setLoading] = useState(false)
+    const loadingMessage = "You are going in..."
+
     useEffect(() => {
         if(location?.state?.created === "success"){
             setAlert(true)
@@ -34,6 +39,7 @@ function Login () {
 
     useEffect(() => {
         if(loginResponse.message === "Login Successful"){
+            setLoading(false)
             setCookies("blogDeskToken", loginResponse.token)
             // localStorage.setItem("blogDeskToken", loginResponse.token)
             navigate("/")
@@ -42,7 +48,7 @@ function Login () {
 
     const loginBtn = async (e) => {
         e.preventDefault();
-        console.log("click");
+        setLoading(true)
         const data = await fetch(databaseApi + "/users/login", {
             method: "POST",
             headers: {
@@ -57,6 +63,8 @@ function Login () {
 
     return(
         <>
+        {/* Loading message */}
+        <Loading loadingMessage={loadingMessage} loading={loading} setLoading={setLoading} />
         {/* Message Alert */}
         <MessageAlert alert={alert} setAlert={setAlert} print={print} />
             <div className={LoginStyle.goHome}>

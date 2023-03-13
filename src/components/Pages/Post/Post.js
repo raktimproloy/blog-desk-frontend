@@ -15,6 +15,7 @@ import ThemeFourImage from "../../../images/themeImage/themeFour.png"
 import ContextApi from "../../../ContextApi/ContextApi";
 import AuthVerification from "../../../commonFunc/AuthVerification";
 import MessageAlert from "../../Sections/MessageAlert/MessageAlert"
+import Loading from "../../Sections/Loading/Loading";
 import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
@@ -51,6 +52,10 @@ function Post () {
         text: "Your blog was posted.."
     }
 
+    // Loading Alert
+    const [loading, setLoading] = useState(false)
+    const loadingMessage = "Your blog is posting..."
+
     useEffect(() => {
         if(userId){
             const token = new Cookies().get("blogDeskToken")
@@ -68,13 +73,13 @@ function Post () {
 
     const postBlogBtn = async (e) => {
         e.preventDefault()
+        
         const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
         ];
         const date = new Date()
         
         const postedTime = `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
-        console.log(blogItem.theme);
         const formData = new FormData()
         formData.append("userId", userId)
         formData.append("theme", blogItem.theme)
@@ -91,11 +96,11 @@ function Post () {
         formData.append("thirdDescription", themeOnePostItem.thirdDescription)
          console.log("isVerified", userData[0].isVerified);
         if(userData[0].isVerified){
-            console.log("Yea", themeOnePostItem.firstDescription);
+            setLoading(true)
             axios.post(`${databaseApi}/blog/post`, formData)
                 .then(res => {
+                    setLoading(false)
                     setAlert(true)
-                    console.log("Res", res);
                     setTimeout(() => {
                         navigate(`/blog?id=${res.data.blogId}`)
                     }, 500);
@@ -111,6 +116,7 @@ function Post () {
     return(
         <>
         {/* Message alert */}
+            <Loading loadingMessage={loadingMessage} loading={loading} setLoading={setLoading} />
             <MessageAlert alert={alert} setAlert={setAlert} print={print} />
             <Navbar/>
             <PageHeading pageHeadingDetails={pageHeadingDetails} />

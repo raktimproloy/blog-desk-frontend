@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import SignupStyle from "./style.module.css"
 import {Link, useNavigate} from "react-router-dom"
 import ContextApi from "../../../ContextApi/ContextApi";
+import Loading from "../../Sections/Loading/Loading";
 
 import axios from "axios"
 // var CryptoJS = require("crypto-js")
@@ -19,6 +20,8 @@ function Signup() {
         text: "Your profile updated."
     }
 
+    const [loading, setLoading] = useState(false)
+    const loadingMessage = "Creating your profile..."
 
     const [userSignupData, setUserSignupData] = useState({
         fullName: "",
@@ -56,7 +59,7 @@ function Signup() {
                     if(userSignupData.password !== ""){
                         if(userSignupData.password === userSignupData.confirmPassword){
                             if(userSignupData.policyAgree === true){
-    
+                                setLoading(true)
                                 const formData = new FormData()
                                 formData.append("profileImage", userSignupData.profileImage)
                                 formData.append("fullName", userSignupData.fullName)
@@ -70,6 +73,7 @@ function Signup() {
                                 // const postData = {userSignupData: ciphertext}
                                 axios.post(`${databaseApi}/users/signup`, formData)
                                 .then(res => {
+                                    setLoading(false)
                                     setInputFieldValid("")
                                     setBackendRes(res.data)
                                     setAlert(true)
@@ -109,6 +113,7 @@ function Signup() {
 
     return(
         <>
+            <Loading loadingMessage={loadingMessage} loading={loading} setLoading={setLoading} />
             <div className={SignupStyle.goHome}>
                 <Link className="bgColorLeftToRight py-3" to={"/"}>Go Home</Link>
             </div>

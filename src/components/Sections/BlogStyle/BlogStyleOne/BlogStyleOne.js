@@ -3,8 +3,6 @@ import { Link, useNavigate } from "react-router-dom"
 import BlogStyleCss from "../style.module.css"
 import ContextApi from "../../../../ContextApi/ContextApi";
 
-import ImageOne from "../../../../images/building.jpeg"
-
 function BlogStyleOne({blogData}) {
     const navigate = useNavigate()
     const [data, setData] = useState({})

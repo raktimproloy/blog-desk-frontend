@@ -3,7 +3,6 @@ import BlogStyleCss from "../style.module.css"
 import ContextApi from "../../../../ContextApi/ContextApi";
 import axios from "axios";
 
-import ImageOne from "../../../../images/building.jpeg"
 import { Link, useNavigate } from "react-router-dom";
 
 function BlogStyleTwo({blogData}) {

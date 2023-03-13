@@ -1,5 +1,4 @@
 import React from "react";
-import testImage from "../../../../images/testImage1.jpg"
 import PopularSectionStyle from "../style.module.css"
 
 function PopularBlog ({blogData}) {
