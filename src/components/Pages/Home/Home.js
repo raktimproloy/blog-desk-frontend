@@ -11,8 +11,6 @@ import axios from "axios";
 import ContextApi from "../../../ContextApi/ContextApi";
 import HomeStyle from "./style.module.css"
 
-import testImage from "../../../images/building.jpeg"
-
 function Home() {
     const [allBlogs, setAllBlogs] = useState([])
     const [standardBlog, setStandardBlog] = useState([])
@@ -22,13 +20,11 @@ function Home() {
         title: "Home",
         des: "Home Can Help You To Decide Your Reading Blog"
     }
-
     const {databaseApi} = useContext(ContextApi)
 
     useEffect(() => {
         axios.get(`${databaseApi}/blog/blogs/all`)
             .then(res => {
-                console.log(res.data.reverse());
                 setAllBlogs(res.data.reverse())
             })
             .catch(err => {
@@ -61,8 +57,13 @@ function Home() {
     return(
         <>
             <Navbar/>
+            <div className="mb-3">
             <PageHeading pageHeadingDetails={pageHeadingDetails}/>
-            <div className="container py-5 d-flex justify-content-between">
+            </div>
+            <div className={`${HomeStyle.responsiveAbout} mt-3 p-4`}>
+                <About className={`mb-0`}/>
+            </div>
+            <div className={`container py-3 d-flex justify-content-between containerResponsive`}>
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>
                     <div>
@@ -109,7 +110,9 @@ function Home() {
                 </div>
                 {/* Left Side */}
                 <div className={`rightSectionContainer`}>
-                    <About/>
+                    <div className="mb-3">
+                        <About/>
+                    </div>
                     <PopularSection/>
                 </div>
             </div>

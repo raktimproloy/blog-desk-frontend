@@ -3,6 +3,7 @@ import LoginStyle from "./style.module.css";
 import {Link, useLocation, useNavigate} from "react-router-dom"
 import ContextApi from "../../../ContextApi/ContextApi";
 import MessageAlert from "../../Sections/MessageAlert/MessageAlert"
+import {useCookies} from "react-cookie"
 
 function Login () {
     const navigate = useNavigate();
@@ -13,6 +14,10 @@ function Login () {
         email: "",
         password: ""
     })
+    
+    const [cookies, setCookies] = useCookies(["blogDeskToken"])
+
+    
 
     // MessageAlert
     const [alert, setAlert] = useState(false)
@@ -29,7 +34,8 @@ function Login () {
 
     useEffect(() => {
         if(loginResponse.message === "Login Successful"){
-            localStorage.setItem("blogDeskToken", loginResponse.token)
+            setCookies("blogDeskToken", loginResponse.token)
+            // localStorage.setItem("blogDeskToken", loginResponse.token)
             navigate("/")
         }
     }, [loginResponse])

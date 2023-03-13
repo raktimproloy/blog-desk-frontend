@@ -19,7 +19,8 @@ function BlogStyleTwo({blogData}) {
 
     useEffect(() => {
         if(data.author){
-            axios.get(`${databaseApi}/users/profile/${data?.author}`)
+            console.log("HIt hoica");
+            axios.get(`${databaseApi}/blog/author/${data?.author}`)
                 .then(res => {
                     setAuthorData(res.data[0])
                 })
@@ -33,13 +34,13 @@ function BlogStyleTwo({blogData}) {
         navigate(`/blog?id=${data._id}`)
     }
     const clickProfile = () => {
-            navigate(`/profile?userId=${data.author}`)
+            navigate(`/author?userId=${data.author}`)
     }
     return(
         <div>
-            <img src={`${databaseApi}/${data?.BlogImageOne}`} alt="Standard" className={BlogStyleCss.blogBigImage}/>
+            <img src={`${data?.BlogImageOne}`} alt="Standard" className={BlogStyleCss.blogBigImage}/>
             <div className={`d-flex align-items-center py-2 mt-2 ${BlogStyleCss.authorImage}`}>
-                <img src={`${databaseApi}/${authorData?.profileImage}`} alt="Author" className="ms-4 me-2" />
+                <img src={`${authorData?.profileImage}`} alt="Author" className="ms-4 me-2" />
                 <p className="pointer" onClick={clickProfile}>{authorData?.fullName}</p>
                 <p className={`${BlogStyleCss.blogTwoPostedTime} text-end`}>{data?.postedTime}</p>
             </div>

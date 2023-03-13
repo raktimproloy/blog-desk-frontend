@@ -28,3 +28,11 @@
 .checkedColor{
     border-color: red !important;
 }
+
+/* Mobile View */
+
+@media screen and (max-width: 425px) {
+    .goHome {
+      display: none;
+    }
+  }

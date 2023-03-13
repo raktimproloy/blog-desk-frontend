@@ -1,8 +1,10 @@
 import jwt_decode from "jwt-decode";
+import { Cookies } from "react-cookie";
 
 function AuthVerification (){
-    const token = localStorage.getItem("blogDeskToken")
-    if(token !== null){
+    const cookies = new Cookies()
+    const token = cookies.get("blogDeskToken")
+    if(token !== undefined){
         const decode = jwt_decode(token)
             if(decode.exp * 1000 < Date.now()){
                 return {

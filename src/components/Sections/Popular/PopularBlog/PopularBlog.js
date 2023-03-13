@@ -2,14 +2,14 @@ import React from "react";
 import testImage from "../../../../images/testImage1.jpg"
 import PopularSectionStyle from "../style.module.css"
 
-function PopularBlog () {
+function PopularBlog ({blogData}) {
     return(
         <>
-            <div className={`d-flex justify-content-between align-items-center text-start py-3 ${PopularSectionStyle.popularBlogContainer}`}>
-                <img src={testImage} alt="Popular Blog" className={PopularSectionStyle.popularBlogImage} />
+            <div className={`d-flex justify-content-start align-items-center text-start py-3 ${PopularSectionStyle.popularBlogContainer}`}>
+                <img src={`${blogData?.BlogImageOne}`} alt="Popular Blog" className={PopularSectionStyle.popularBlogImage} />
                 <div className={` ms-3 ${PopularSectionStyle.popularBlogTexts}`}>
-                    <h5>This is a popular bolg title. Please watch this</h5>
-                    <p>19 August 2022</p>
+                    <h5>{blogData?.title}</h5>
+                    <p>{blogData?.postedTime}</p>
                 </div>
             </div>
         </>

@@ -148,7 +148,7 @@ function Blog (){
     }, [blogData])
 
     const getUserData = (userId) => {
-        axios.get(`${databaseApi}/users/profile/${userId}`)
+        axios.get(`${databaseApi}/blog/author/${userId}`)
             .then(res => {
                 setUserData(res.data[0]);
             })
@@ -215,6 +215,10 @@ function Blog (){
             navigate("/login")
         }
     }
+    const clickProfile = () => {
+        console.log(blogData.author);
+        navigate(`/author?userId=${blogData.author}`)
+}
 
     return(
         <>
@@ -262,9 +266,9 @@ function Blog (){
                         {
                             userData &&
                             <div className="d-flex align-items-center">
-                                <img src={`${databaseApi}/${userData.profileImage}`} alt="Author"  className={MainBlogStyle.authorImage}/>
+                                <img src={`${userData.profileImage}`} onClick={clickProfile} alt="Author"  className={MainBlogStyle.authorImage}/>
                                 <div>
-                                    <p className={`ps-4`}>{userData.fullName}</p>
+                                    <p className={`ps-4`} onClick={clickProfile}>{userData.fullName}</p>
                                     <span className={`ps-4`}>{blogData.category}</span>
                                     <span className={`ps-4`}>{blogData.postedTime}</span>
                                 </div>

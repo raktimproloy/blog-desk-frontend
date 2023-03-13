@@ -39,7 +39,6 @@ export const Popular = () => {
                             {allBlogs.map(blog => 
                                 <BlogStyleThree blogData={blog} key={blog._id}/>
                             )}
-                            {console.log(allBlogs)}
                         </div>
                     </div>
                 </div>

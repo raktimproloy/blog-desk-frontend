@@ -26,7 +26,7 @@ const Comment = ({commentId}) => {
 
     useEffect(() => {
         if(commentData._id !== undefined){
-            axios.get(`${databaseApi}/users/profile/${commentData.commentAuthor}`)
+            axios.get(`${databaseApi}/blog/author/${commentData.commentAuthor}`)
             .then(res => { 
                 setCommentAuthor(res.data[0]);
             })
@@ -39,7 +39,7 @@ const Comment = ({commentId}) => {
     return(
         <>
         <div className={`d-flex align-items-center`}>
-            <img src={`${databaseApi}/${commentAuthor.profileImage}`} alt="comment" className={MainBlogStyle.commentOwnerImage} />
+            <img src={`${commentAuthor.profileImage}`} alt="comment" className={MainBlogStyle.commentOwnerImage} />
             <div className="ms-5">
                 <h5 className={MainBlogStyle.commentOwnerName}>{commentAuthor?.fullName}</h5>
                 <p>{commentData.comment}</p>

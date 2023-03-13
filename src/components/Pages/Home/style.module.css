@@ -1,16 +1,19 @@
 
-
 .standardBlogRightPart{
     width: 50%;
 }
-
-
-
-
+.responsiveAbout{
+    display: none;
+}
 
 /* Standard Blog Style Left Part */
 .standardBlogLeftPart{
     width: 50%;
 }
 
-
+/* Mobile view */
+@media screen and (max-width: 768px) {
+    .responsiveAbout{
+        display: block;
+    }
+  }

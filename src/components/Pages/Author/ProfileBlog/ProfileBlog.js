@@ -36,7 +36,6 @@ function ProfileBlog({blogId, setDeletedBlog, setDeletePopup}) {
                 <p className={`mb-2`}>{blogData?.firstDescription?.slice(0, 170)}{blogData?.firstDescription?.length > 170 && <span> ...</span>}</p>
                 {blogData?.firstDescription?.length > 170 && <p className="pointer" onClick={clickBlog}><u>See more</u></p>}
             </div>
-            <span className="pointer" onClick={() => {setDeletedBlog(blogId); setDeletePopup(true)}}><MdDeleteForever/></span>
         </div>
     )
 }

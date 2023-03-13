@@ -6,6 +6,7 @@ import { RxCross2 } from 'react-icons/rx';
 import {Link, useLocation} from "react-router-dom"
 import AuthVerification from "../../../commonFunc/AuthVerification";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useCookies } from "react-cookie";
 
 function Navbar () {
     
@@ -14,11 +15,14 @@ function Navbar () {
     const [showSearchPopup, setShowSearchPopup] = useState(false)
     const [showSideNavbar, setShowSideNavbar] = useState(false)
     const [showSideNavbarDropdown, setShowSideNavbarDropdown] = useState(false)
+    AuthVerification()
     const {isExp, userId, fullName, email} = AuthVerification();
     const location = useLocation()
 
+    const [cookies, setCookie, removeCookie] = useCookies()
+
     const logoutBtn = () => {
-        localStorage.clear()
+        removeCookie("blogDeskToken")
     }
     useEffect(() => {
         window.addEventListener('scroll', stickNavbar);
@@ -57,9 +61,9 @@ function Navbar () {
                     <h1>
                     <Link className={`navbar-brand titleText`} to={"/"}>BlogDesk</Link>
                     </h1>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                    </button>
+                    <li className="nav-item bgColorTopToBottom mx-2 navbar-toggler">
+                        <span className="nav-link pointer" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
+                    </li>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className={`nav-item mx-2 d-flex align-items-center`} >
@@ -90,13 +94,13 @@ function Navbar () {
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item mx-2">
                                 { 
-                                    AuthVerification().isExp ? <Link className="nav-link bgColorTopToBottom" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
+                                    AuthVerification().isExp ? <Link className="nav-link bgColorTopToBottom" to={`/profile`} ><AiOutlineUser/></Link> : ""
                                 }
                                 
                             </li>
-                            <li className="nav-item bgColorTopToBottom mx-2">
+                            {/* <li className="nav-item bgColorTopToBottom mx-2">
                                 <span className="nav-link pointer" onClick={ () => setShowSearchPopup(true)}><BiSearchAlt2/></span>
-                            </li>
+                            </li> */}
                             <li className="nav-item bgColorTopToBottom mx-2">
                                 <span className="nav-link pointer" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
                             </li>
@@ -111,9 +115,9 @@ function Navbar () {
                     <h1>
                     <Link className={`navbar-brand titleText`} to={"/"}>BlogDesk</Link>
                     </h1>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                    </button>
+                    <li className="nav-item bgColorTopToBottom mx-2 navbar-toggler">
+                        <span className="nav-link pointer" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
+                    </li>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className={`nav-item mx-2 d-flex align-items-center`} >
@@ -144,13 +148,13 @@ function Navbar () {
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item mx-2">
                                 { 
-                                    AuthVerification().isExp ? <Link className="nav-link bgColorTopToBottom" to={`/profile?userId=${userId}`} ><AiOutlineUser/></Link> : ""
+                                    AuthVerification().isExp ? <Link className="nav-link bgColorTopToBottom" to={`/profile`} ><AiOutlineUser/></Link> : ""
                                 }
                                 
                             </li>
-                            <li className="nav-item bgColorTopToBottom mx-2">
+                            {/* <li className="nav-item bgColorTopToBottom mx-2">
                                 <span className="nav-link pointer" onClick={ () => setShowSearchPopup(true)}><BiSearchAlt2/></span>
-                            </li>
+                            </li> */}
                             <li className="nav-item bgColorTopToBottom mx-2">
                                 <span className="nav-link pointer" onClick={() => setShowSideNavbar(true)}><AiOutlineMenu/></span>
                             </li>
@@ -163,7 +167,7 @@ function Navbar () {
                 <div className={NavbarStyle.sideNavRightSide}>
                     <p className={NavbarStyle.crossNav} onClick={() => setShowSideNavbar(false)}><RxCross2/></p>
                     <div className={NavbarStyle.sideNavListContainer}>
-                        <Link className={`navbar-brand d-block mb-4 titleText`} to={"/"}>BlogDesk</Link>
+                        <Link className={`navbar-brand d-block mb-4 titleText ${NavbarStyle.sideNavTitle}`} to={"/"}>BlogDesk</Link>
                         <ul className={NavbarStyle.sideNavLists}>
                             <li><a href="/">Home</a></li>
                             <li className="nav-item dropdown">
@@ -185,8 +189,8 @@ function Navbar () {
                             { 
                                     AuthVerification().isExp ? 
                                     <>
-                                    <li><Link to={`/profile?userId=${userId}`}>Profile</Link></li> 
-                                    <li><Link to={`/setting?userId=${userId}`}>Setting</Link></li> 
+                                    <li><Link to={`/profile`}>Profile</Link></li> 
+                                    <li><Link to={`/setting`}>Setting</Link></li> 
                                     <li onClick={logoutBtn}><Link to={"/login"}>Log out</Link></li> 
                                     
                                     </>

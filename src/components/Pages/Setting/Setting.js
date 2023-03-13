@@ -9,7 +9,8 @@ import Footer from "../../Sections/Footer/Footer"
 import MessageAlert from '../../Sections/MessageAlert/MessageAlert';
 import axios from "axios"
 import { RxCross2 } from 'react-icons/rx';
-import { useLocation } from "react-router-dom";
+import { Cookies } from "react-cookie";
+import AuthVerification from '../../../commonFunc/AuthVerification';
 
 const Setting = () => {
     const pageHeadingDetails = {
@@ -33,12 +34,11 @@ const Setting = () => {
         text: "Your profile updated."
     }
     
-    const {search} = useLocation()
-    const queryParams = new URLSearchParams(search)
-    const userId = queryParams.get("userId")
-
+    const userId = AuthVerification().userId
+    console.log(AuthVerification().userId);
     useEffect(() => {
-        axios.get(`${databaseApi}/users/profile/${userId}`)
+        const token = new Cookies().get("blogDeskToken")
+        axios.get(`${databaseApi}/users/profile`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
                 setUpdateProfile(res.data[0])
                 setPresentImage(res.data[0].profileImage)

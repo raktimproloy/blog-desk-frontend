@@ -1,0 +1,64 @@
+.profileIcons{
+    width: 30%;
+}
+.profileIcons li{
+    font-size: 22px;
+}
+.profileImage{
+    outline: 4px solid #ff214a;
+    background-color: rgb(155, 155, 155);
+}
+.profileDetailsContainer{
+    width: 100%;
+    margin-top: 5%;
+    padding: 4%;
+    background-color: rgb(255, 228, 228);
+    position: relative;
+}
+.profileNameImage img{
+    position: absolute;
+    top: -20%;
+    left: 5%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 5%;
+}
+
+/* Profile Blog Style */
+.blogBigImageTwo{
+    width:35%;
+    height: 175px;
+    border-radius: 20px;
+}
+.blogRightSide{
+    width: 65%;
+}
+.blogRightSide h1{
+    font-size: 22px;
+    font-weight: bold;
+}
+.authorImage img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.authorImage p{
+    margin: 0;
+    margin: 0 8px;
+}
+.deletePopup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    background-color: rgba(233, 233, 233, 0.062);
+}
+.deletePopupBlock{
+    background-color: white;
+    border-radius: 10px;
+    padding: 2% 5%;
+    outline: 2px solid #fe4f70;
+}

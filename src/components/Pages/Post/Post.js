@@ -15,12 +15,15 @@ import ThemeFourImage from "../../../images/themeImage/themeFour.png"
 import ContextApi from "../../../ContextApi/ContextApi";
 import AuthVerification from "../../../commonFunc/AuthVerification";
 import MessageAlert from "../../Sections/MessageAlert/MessageAlert"
+import { Cookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 function Post () {
     const pageHeadingDetails = {
         title: "Post",
         des: "Post Can Help You To Get Your Popularity"
     }
+    const navigate = useNavigate()
     const {databaseApi} = useContext(ContextApi)
     const [category, setCategory] = useState("None")
     const [userData, setUserData] = useState({})
@@ -50,7 +53,9 @@ function Post () {
 
     useEffect(() => {
         if(userId){
-            axios.get(`${databaseApi}/users/profile/${userId}`)
+            const token = new Cookies().get("blogDeskToken")
+            console.log(token);
+            axios.get(`${databaseApi}/users/profile`, {headers: {"Authorization": `Bearer ${token}`}})
                 .then(res => {
                     setUserData(res.data);
                 })
@@ -90,19 +95,10 @@ function Post () {
             axios.post(`${databaseApi}/blog/post`, formData)
                 .then(res => {
                     setAlert(true)
-                    setThemeOnePostItem({
-                        BlogImageOne: "",
-                        BlogImageTwo: "",
-                        BlogImageThree: "",
-                        BlogImageFour: "",
-                        firstDescription: "",
-                        secondDescription: "",
-                        thirdDescription: "",
-                    })
-                    setBlogItem({
-                        theme: "themeOne",
-                        title: ""
-                    })
+                    console.log("Res", res);
+                    setTimeout(() => {
+                        navigate(`/blog?id=${res.data.blogId}`)
+                    }, 500);
                 })
                 .catch(err => {
                     console.log(err);
@@ -131,20 +127,20 @@ function Post () {
                         <form onSubmit={postBlogBtn} encType="multipart/form-data">
                             <div className="py-3">
                                 <h5>Select Your Theme</h5>
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <div className={`defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeOne" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeOne" })} >
+                                <div className="d-flex justify-content-between align-items-center row">
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeOne" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeOne" })} >
                                         <img src={ThemeOneImage} alt="Theme One" />
                                         <p>Theme One</p>
                                     </div>
-                                    <div className={`defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeTwo" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeTwo" })} >
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeTwo" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeTwo" })} >
                                         <img src={ThemeTwoImage} alt="Theme Two" />
                                         <p>Theme Two</p>
                                     </div>
-                                    <div className={`defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeThree" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeThree" })} >
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeThree" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeThree" })} >
                                         <img src={ThemeThreeImage} alt="Theme Three" />
                                         <p>Theme Three</p>
                                     </div>
-                                    <div className={`defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeFour" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeFour" })} >
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeFour" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeFour" })} >
                                         <img src={ThemeFourImage} alt="Theme Four" />
                                         <p>Theme Four</p>
                                     </div>

@@ -3,15 +3,14 @@ import ProfileStyle from "./style.module.css"
 import ProfileBlog from "./ProfileBlog/ProfileBlog";
 import Navbar from "../../Sections/Navbar/Navbar"
 import PageHeading from "../../Sections/PageHeading/PageHeading"
-import Footer from "../../Sections/Footer/Footer";
 import User from "./User/User";
 import ContextApi from "../../../ContextApi/ContextApi";
 import axios from "axios"
 import { useLocation, useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
 
-function Profile() {
-    console.log("Profile");
+function Author() {
+    console.log("Author");
     const pageHeadingDetails = {
         title: "Home",
         des: "Home Can Help You To Decide Your Reading Blog"
@@ -26,8 +25,13 @@ function Profile() {
 
     const token = new Cookies().get("blogDeskToken")
 
+    const {search} = useLocation()
+    const queryParams = new URLSearchParams(search)
+    const userId = queryParams.get("userId")
+
     useEffect(() => {
-        axios.get(`${databaseApi}/users/profile`, {headers: {"Authorization": `Bearer ${token}`}})
+
+        axios.get(`${databaseApi}/blog/author/${userId}`)
             .then(res => {
                 console.log(res);
                 setUserData(res.data[0]);
@@ -48,26 +52,17 @@ function Profile() {
                 console.log("Success");
                 console.log(res);
                 setDeletedSuccessful(!deletedSuccessful)
-            })
-            .catch(err => {
-                console.log("error");
-                console.log(err);
-            })
+                })
+                .catch(err => {
+                    console.log("error");
+                    console.log(err);
+                })
     }
 
     return(
         <>
             <Navbar/>
             <PageHeading pageHeadingDetails={pageHeadingDetails} />
-            <div className={`${ProfileStyle.deletePopup} d-flex justify-content-center align-items-center ${deletePopup ? "d-block" : "d-none"}`}>
-                <div className={`${ProfileStyle.deletePopupBlock}`}>
-                    <h5>Do you want to delete?</h5>
-                    <div className={`d-flex justify-content-between align-items-center mt-4`}>
-                        <span className={`bgColorLeftToRight py-1 pointer`} onClick={() => {deleteBlog(); setDeletePopup(false)}} >Yes</span>
-                        <span className={`bgColorLeftToRight py-1 pointer`} onClick={() => setDeletePopup(false)} >No</span>
-                    </div>
-                </div>
-            </div>
             <div className="container py-5 d-flex justify-content-between">
                 {/* Right Side */}
                 <div className={`leftSectionContainer`}>
@@ -97,9 +92,9 @@ function Profile() {
 
                 </div>
             </div>
-            {/* <Footer/> */}
+            
         </>
     )
 }
 
-export default Profile;
+export default Author;

@@ -7,6 +7,7 @@ import Blog from "./components/Pages/Blog/Blog"
 import Post from "./components/Pages/Post/Post";
 import Profile from "./components/Pages/Profile/Profile";
 import Setting from "./components/Pages/Setting/Setting";
+import Author from "./components/Pages/Author/Author";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./common/css/style.css"
 import {
@@ -20,16 +21,17 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={ <Home/> } />
-        <Route path="signup" element={ <Signup/> } />
-        <Route path="login" element={ <Login/> } />
-        <Route path="category" element={ <Category/> } />
-        <Route path="popular" element={ <Popular/> } />
-        <Route path="blog" element={ <Blog/> } />
+        <Route path="/signup" element={ <Signup/> } />
+        <Route path="/login" element={ <Login/> } />
+        <Route path="/category" element={ <Category/> } />
+        <Route path="/popular" element={ <Popular/> } />
+        <Route path="/blog" element={ <Blog/> } />
+        <Route path="/author" element={ <Author/> } />
           <Route element={<ProtectedRoutes/>}>
             <Route path="/post" element={<Post/>} />
             <Route path="/setting" element={<Setting/>} />
+            <Route path="/Profile" element={ <Profile/> } />
           </Route>
-        <Route path="Profile" element={ <Profile/> } />
       </Routes>
     </div>
   );

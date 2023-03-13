@@ -25,3 +25,11 @@
     position: fixed;
     margin: 40px 0px 0px 20px;
 }
+
+/* Mobile View */
+
+@media screen and (max-width: 425px) {
+    .goHome {
+      display: none;
+    }
+  }

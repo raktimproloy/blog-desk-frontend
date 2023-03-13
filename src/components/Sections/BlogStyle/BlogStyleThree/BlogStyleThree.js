@@ -21,8 +21,9 @@ function BlogStyleThree({blogData}) {
 
     useEffect(() => {
         if(data.author){
-            axios.get(`${databaseApi}/users/profile/${data.author}`)
+            axios.get(`${databaseApi}/blog/author/${data.author}`)
                 .then(res => {
+                    console.log(res.data[0]);
                     setAuthorData(res.data[0])
                 })
                 .catch(err => {
@@ -35,14 +36,14 @@ function BlogStyleThree({blogData}) {
             navigate(`/blog?id=${data._id}`)
     }
     const clickProfile = () => {
-            navigate(`/profile?userId=${data.author}`)
+            navigate(`/author?userId=${data.author}`)
     }
     return(
-        <div className="defaultBorder d-flex justify-content-between align-items-center p-4 mb-2">
-            <img src={`${databaseApi}/${data?.BlogImageOne}`} alt="Blog" className={BlogStyleCss.blogBigImageTwo}/>
-            <div className={`ms-4 ${BlogStyleCss.blogRightSide}`}>
+        <div className="defaultBorder d-flex justify-content-between align-items-center p-4 mb-2 row">
+            <img src={`${data?.BlogImageOne}`} alt="Blog" className={`${BlogStyleCss.blogBigImageTwo} col-md-6`}/>
+            <div className={`${BlogStyleCss.blogRightSide} col-md-6`}>
                 <div className={`d-flex align-items-center py-2 ${BlogStyleCss.authorImage}`}>
-                    <img src={`${databaseApi}/${authorData?.profileImage}`} alt="Author" />
+                    <img src={`${authorData?.profileImage}`} alt="Author" />
                     <p className="pointer" onClick={clickProfile}>{authorData?.fullName}</p>
                     <p>{data?.postedTime}</p>
                 </div>

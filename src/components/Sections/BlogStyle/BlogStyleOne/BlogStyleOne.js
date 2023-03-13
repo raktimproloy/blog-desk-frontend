@@ -20,7 +20,7 @@ function BlogStyleOne({blogData}) {
     }
     return(
         <div className={`d-flex mb-4 ${BlogStyleCss.BlogStyleOneContainer}`}>
-            <img src={`${databaseApi}/${data?.BlogImageOne}`} alt="Standard" />
+            <img src={`${data?.BlogImageOne}`} alt="Standard" />
             <div className={`ms-3 ${BlogStyleCss.BlogStyleOneText}`}>
                 <h5 className="pointer" onClick={clickBlog}>{data?.title}</h5>
                 <p>{data?.postedTime}</p>

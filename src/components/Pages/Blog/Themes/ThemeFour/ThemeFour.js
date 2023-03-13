@@ -7,7 +7,7 @@ function ThemeFour({blogData}) {
     return(
         <>
             <div>
-                <img src={`${databaseApi}/${blogData.BlogImageOne}`} alt="Blog" className={themeFourStyle.firstImage} />
+                <img src={`${blogData.BlogImageOne}`} alt="Blog" className={themeFourStyle.firstImage} />
                 <p className={themeFourStyle.descriptionText}>{blogData.firstDescription.split("\n").map((line, j) => {
                     return (
                         <React.Fragment key={`line-${j}`}>
@@ -16,7 +16,7 @@ function ThemeFour({blogData}) {
                         </React.Fragment>
                     )
                 })}</p>
-                <img src={`${databaseApi}/${blogData.BlogImageTwo}`} alt="Blog" className={themeFourStyle.secondImage} />
+                <img src={`${blogData.BlogImageTwo}`} alt="Blog" className={themeFourStyle.secondImage} />
                 <p className={themeFourStyle.descriptionText}>{blogData.secondDescription.split("\n").map((line, j) => {
                     return (
                         <React.Fragment key={`line-${j}`}>
@@ -26,8 +26,8 @@ function ThemeFour({blogData}) {
                     )
                 })}</p>
                 <div>
-                    <img src={`${databaseApi}/${blogData.BlogImageThree}`} alt="Blog" className={themeFourStyle.thirdImage} />
-                    <img src={`${databaseApi}/${blogData.BlogImageFour}`} alt="Blog" className={themeFourStyle.fourthImage} />
+                    <img src={`${blogData.BlogImageThree}`} alt="Blog" className={themeFourStyle.thirdImage} />
+                    <img src={`${blogData.BlogImageFour}`} alt="Blog" className={themeFourStyle.fourthImage} />
                 </div>
                 <p className={themeFourStyle.descriptionText}>{blogData.thirdDescription.split("\n").map((line, j) => {
                     return (

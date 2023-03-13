@@ -180,3 +180,20 @@ h1, h2, h3, h4, h5, h6{
 .errorOne{
     color: red;
 }
+
+
+/* Mobile Responsive */
+/* @media screen and (max-width: 991px) {
+    .containerResponsive{
+        max-width: 100%!important;
+    }
+    
+} */
+@media screen and (max-width: 768px) {
+    .leftSectionContainer{
+        width: 100%!important;
+    }
+    .rightSectionContainer{
+        display: none;
+    }
+}
