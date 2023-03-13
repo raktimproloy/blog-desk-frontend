@@ -139,7 +139,10 @@ const Setting = () => {
         <Navbar/>
         <PageHeading pageHeadingDetails={pageHeadingDetails} />
 
-        <div className={`container py-5`}>
+        <div className={`${settingStyle.responsiveImage} mt-3 p-4`}>
+            <Image databaseApi={databaseApi} updateProfile={updateProfile} setUpdateProfile={setUpdateProfile} presentImage={presentImage} />
+        </div>
+        <div className={`container pb-5 pt-3`}>
             <h2 className={`text-center mb-4`}>Edit Profile</h2>
             <div className="d-flex justify-content-between">
                 {/* Left Side */}

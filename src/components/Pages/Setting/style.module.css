@@ -67,3 +67,22 @@ input[type=number] {
 .linkInputField{
   border-radius: 0px 10px 10px 0 !important;
 }
+
+.responsiveImage{
+  width: 60%;
+  margin: 0 auto;
+  display: none;
+}
+
+/* Mobile view */
+@media screen and (max-width: 768px) {
+  .responsiveImage{
+    display: block;
+  }
+}
+@media screen and (max-width: 425px) {
+  .responsiveImage{
+    width:100%;
+    display: block;
+  }
+}

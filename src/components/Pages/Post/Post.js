@@ -127,7 +127,7 @@ function Post () {
                         <form onSubmit={postBlogBtn} encType="multipart/form-data">
                             <div className="py-3">
                                 <h5>Select Your Theme</h5>
-                                <div className="d-flex justify-content-between align-items-center row">
+                                <div className="row gx-5 gy-3">
                                     <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeOne" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeOne" })} >
                                         <img src={ThemeOneImage} alt="Theme One" />
                                         <p>Theme One</p>
