@@ -13,8 +13,8 @@ import { Cookies } from "react-cookie";
 function Profile() {
     console.log("Profile");
     const pageHeadingDetails = {
-        title: "Home",
-        des: "Home Can Help You To Decide Your Reading Blog"
+        title: "Profile",
+        des: "You are the king and this is your kingdom"
     }
     const navigate = useNavigate()
     const [userData, setUserData] = useState([])
@@ -97,7 +97,7 @@ function Profile() {
 
                 </div>
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </>
     )
 }

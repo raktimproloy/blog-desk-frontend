@@ -47,11 +47,11 @@ function Post () {
 
     // MessageAlert
     const [alert, setAlert] = useState(false)
-    const print = {
+    const [print, setPrint] = useState({
         topic: true,
-        text: "Your blog was posted.."
-    }
-
+        text: ""
+    })
+    
     // Loading Alert
     const [loading, setLoading] = useState(false)
     const loadingMessage = "Your blog is posting..."
@@ -59,7 +59,6 @@ function Post () {
     useEffect(() => {
         if(userId){
             const token = new Cookies().get("blogDeskToken")
-            console.log(token);
             axios.get(`${databaseApi}/users/profile`, {headers: {"Authorization": `Bearer ${token}`}})
                 .then(res => {
                     setUserData(res.data);
@@ -80,36 +79,49 @@ function Post () {
         const date = new Date()
         
         const postedTime = `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
-        const formData = new FormData()
-        formData.append("userId", userId)
-        formData.append("theme", blogItem.theme)
-        formData.append("title", blogItem.title)
-        formData.append("category", category)
-        formData.append("postedTime", postedTime)
-        
-        formData.append("BlogImageOne", themeOnePostItem.BlogImageOne)
-        formData.append("BlogImageTwo", themeOnePostItem.BlogImageTwo)
-        formData.append("BlogImageThree", themeOnePostItem.BlogImageThree)
-        formData.append("BlogImageFour", themeOnePostItem.BlogImageFour)
-        formData.append("firstDescription", themeOnePostItem.firstDescription)
-        formData.append("secondDescription", themeOnePostItem.secondDescription)
-        formData.append("thirdDescription", themeOnePostItem.thirdDescription)
-         console.log("isVerified", userData[0].isVerified);
         if(userData[0].isVerified){
+            const formData = new FormData()
+            formData.append("userId", userId)
+            formData.append("theme", blogItem.theme)
+            formData.append("title", blogItem.title)
+            formData.append("category", category)
+            formData.append("postedTime", postedTime)
+            
+            formData.append("BlogImageOne", themeOnePostItem.BlogImageOne)
+            formData.append("BlogImageTwo", themeOnePostItem.BlogImageTwo)
+            formData.append("BlogImageThree", themeOnePostItem.BlogImageThree)
+            formData.append("BlogImageFour", themeOnePostItem.BlogImageFour)
+            formData.append("firstDescription", themeOnePostItem.firstDescription)
+            formData.append("secondDescription", themeOnePostItem.secondDescription)
+            formData.append("thirdDescription", themeOnePostItem.thirdDescription)
+
             setLoading(true)
             axios.post(`${databaseApi}/blog/post`, formData)
                 .then(res => {
                     setLoading(false)
+                    setPrint({
+                        topic: true,
+                        text: "Your blog was posted!"
+                    }) 
                     setAlert(true)
                     setTimeout(() => {
                         navigate(`/blog?id=${res.data.blogId}`)
                     }, 500);
                 })
                 .catch(err => {
-                    console.log(err);
+                    setLoading(false)
+                    setPrint({
+                        topic: false,
+                        text: "Please, check your items"
+                    }) 
+                    setAlert(true)
                 })
         }else{
-            console.log("Not");
+            setPrint({
+                topic: false,
+                text: "You are not verified!"
+            }) 
+            setAlert(true)
         }
 
     }
@@ -128,7 +140,7 @@ function Post () {
                 <div className={`leftSectionContainer`}>
                     <h1 className="text-center py-2">Post Your Blog</h1>
                     <p className="text-center pt-2">Select your theme and post your blog.</p>
-                    <p className="text-center pb-2">Note: Without verify you can post only 1 blog.</p>
+                    <p className="text-center pb-2 text-danger">Note: Without verify you can't post!</p>
                     <div>
                         <form onSubmit={postBlogBtn} encType="multipart/form-data">
                             <div className="py-3">

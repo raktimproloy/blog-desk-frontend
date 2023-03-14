@@ -89,6 +89,7 @@ function Signup() {
                                     
                                 })
                                 .catch(err => {
+                                    setLoading(false)
                                     setBackendRes(err.response.data)
                                 })
                             }else{

@@ -13,7 +13,6 @@ function BlogStyleThree({blogData}) {
 
     useEffect(() => {
         if(blogData){
-            console.log("BlogData",blogData);
             setData(blogData)
         }
     }, [blogData])
@@ -22,7 +21,6 @@ function BlogStyleThree({blogData}) {
         if(data.author){
             axios.get(`${databaseApi}/blog/author/${data.author}`)
                 .then(res => {
-                    console.log(res.data[0]);
                     setAuthorData(res.data[0])
                 })
                 .catch(err => {

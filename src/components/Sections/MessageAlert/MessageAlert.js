@@ -10,7 +10,6 @@ export const MessageAlert = ({alert, setAlert, print}) => {
   //   text: "Your profile updated."
   // }
   // <MessageAlert alert={alert} setAlert={setAlert} print={print} />
-
   useEffect(() => {
     setTimeout(() => {
       setAlert(false)
@@ -19,7 +18,7 @@ export const MessageAlert = ({alert, setAlert, print}) => {
   return (
     <>
       <div className={`${MessageAlertStyle.container} ${alert && MessageAlertStyle.showMessage}`}>
-        <div className={`${MessageAlertStyle.textContainer}`}>
+        <div className={`${MessageAlertStyle.textContainer} ${print.topic ? "" : MessageAlertStyle.textContainerError}`}>
           <div className={`d-flex align-items-center justify-content-center`}>
             <span className={`pe-2 ${MessageAlertStyle.messageIcon}`}><BsEmojiSmileFill/></span>
             <span className={`${MessageAlertStyle.messageText}`}>{print.text}</span>

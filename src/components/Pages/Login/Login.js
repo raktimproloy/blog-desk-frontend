@@ -43,13 +43,16 @@ function Login () {
             setCookies("blogDeskToken", loginResponse.token)
             // localStorage.setItem("blogDeskToken", loginResponse.token)
             navigate("/")
+        }else{
+            setLoading(false)
         }
     }, [loginResponse])
 
     const loginBtn = async (e) => {
         e.preventDefault();
         setLoading(true)
-        const data = await fetch(databaseApi + "/users/login", {
+        
+        await fetch(databaseApi + "/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

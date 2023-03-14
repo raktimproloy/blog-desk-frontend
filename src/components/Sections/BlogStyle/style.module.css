@@ -3,7 +3,7 @@
 .BlogStyleOneContainer img{
     width: 130px;
     height: 80px;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 .BlogStyleOneText h5{
     font-weight: bold;
@@ -24,7 +24,7 @@
 .blogBigImage{
     width: 100%;
     height: 22vh;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 /* BlogStyle Three Css */

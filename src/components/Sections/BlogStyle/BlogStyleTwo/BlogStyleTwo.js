@@ -18,7 +18,6 @@ function BlogStyleTwo({blogData}) {
 
     useEffect(() => {
         if(data.author){
-            console.log("HIt hoica");
             axios.get(`${databaseApi}/blog/author/${data?.author}`)
                 .then(res => {
                     setAuthorData(res.data[0])
