@@ -31,6 +31,12 @@ function Navbar () {
           window.removeEventListener('scroll', stickNavbar);
         };
       }, []);
+
+      useEffect(() => {
+        setTimeout(() => {
+            console.log("Calling");
+        }, 3000);
+      }, [])
     
       const stickNavbar = () => {
         if (window !== undefined) {

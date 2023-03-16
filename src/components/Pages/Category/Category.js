@@ -20,6 +20,7 @@ function Category() {
     const category = queryParams.get("c")
     const [allBlogs, setAllBlogs] = useState([])
     const {databaseApi} = useContext(ContextApi)
+    const [showCardNum, setShowCardNum] = useState(10)
 
     useEffect(() => {
         axios.get(`${databaseApi}/blog/blogs/all`)
@@ -30,6 +31,7 @@ function Category() {
                 console.log(err);
             })
     }, [])
+
     return(
         <>
             <Navbar/>
@@ -42,7 +44,7 @@ function Category() {
                             {allBlogs.map(blog => 
                                 blog.category.toLowerCase() === category && <BlogStyleThree blogData={blog} key={blog._id}/>
                                 )}
-                            {console.log(allBlogs)}
+                            {console.log(allBlogs.slice(0, showCardNum))}
                         </div>
                     </div>
                 </div>

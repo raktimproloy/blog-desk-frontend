@@ -7,6 +7,7 @@ import Image from './ImageSetting/ImageSetting';
 import ContextApi from "../../../ContextApi/ContextApi";
 import Footer from "../../Sections/Footer/Footer"
 import MessageAlert from '../../Sections/MessageAlert/MessageAlert';
+import Loading from '../../Sections/Loading/Loading';
 import axios from "axios"
 import { RxCross2 } from 'react-icons/rx';
 import { Cookies } from "react-cookie";
@@ -29,10 +30,13 @@ const Setting = () => {
     const {databaseApi} = useContext(ContextApi)
     // alert message
     const [alert, setAlert] = useState(false)
-    const print = {
+    const [print, setPrint] = useState({
         topic: true,
-        text: "Your profile updated."
-    }
+        text: ""
+    })
+    // Loading message
+    const [loading, setLoading] = useState(false)
+    const loadingMessage = "updating your profile..."
     
     const userId = AuthVerification().userId
     console.log(AuthVerification().userId);
@@ -52,6 +56,7 @@ const Setting = () => {
     
     const handlePassword = (e) => {
         e.preventDefault()
+        setLoading(true)
         console.log("password",updateProfile);
         
         const formData = new FormData()
@@ -68,13 +73,33 @@ const Setting = () => {
         axios.put(`${databaseApi}/users/update/${userId}`, formData)
         .then(res => {
             console.log(res);
+            setLoading(false)
             setUpdated("updated")
             setPopupPassword(false)
+            setPrint({
+                topic: true,
+                text: "Your profile updated."
+            })
             setAlert(true)
         })
         .catch(err => {
-            console.log(err.response.data.error);
+            setLoading(false)
+            setPopupPassword(false)
             setUpdatedError(err.response.data.error)
+            console.log(err.response.data.error);
+            if(err.response.data.error === "Wrong Link"){
+                setPrint({
+                    topic: false,
+                    text: "Check your linkup!"
+                })
+                setAlert(true)
+            }else if(err.response.data.error === "Id not verified!"){
+                setPrint({
+                    topic: false,
+                    text: "Ohh! You are not verified ?"
+                })
+                setAlert(true)
+            }
         })
         
     }
@@ -103,6 +128,8 @@ const Setting = () => {
     }
   return (
     <>
+    {/* Loading popup */}
+    <Loading loadingMessage={loadingMessage} loading={loading} setLoading={setLoading} />
     {/* Message alert Popup */}
     <MessageAlert alert={alert} setAlert={setAlert} print={print} />
     {/* Pop up for otp verification */}

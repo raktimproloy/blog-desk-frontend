@@ -14,6 +14,7 @@ export const Popular = () => {
     }
     const {databaseApi} = useContext(ContextApi)
     const [allBlogs, setAllBlogs] = useState([])
+    const [showCardNum, setShowCardNum] = useState(10)
 
     useEffect(() => {
         axios.get(`${databaseApi}/blog/blogs/all`)
@@ -27,6 +28,10 @@ export const Popular = () => {
             })
     }, [])
 
+    const handleSeeMore = () => {
+        setShowCardNum(showCardNum + 10)
+    }
+
   return (
     <>
         <Navbar/>
@@ -36,9 +41,14 @@ export const Popular = () => {
                 <div className={`leftSectionContainer`}>
                     <div>
                         <div>
-                            {allBlogs.map(blog => 
+                            {allBlogs.slice(0, showCardNum).map(blog => 
                                 <BlogStyleThree blogData={blog} key={blog._id}/>
                             )}
+                        </div>
+                    </div>
+                    <div onClick={handleSeeMore} className="bgColorLeftToRight" >
+                        <div>
+                            See More
                         </div>
                     </div>
                 </div>

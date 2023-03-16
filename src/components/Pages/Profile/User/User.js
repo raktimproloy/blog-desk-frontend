@@ -33,10 +33,10 @@ const User = ({userData}) => {
             <div>
                 <p className={`${userData?.about === "" ? "pointer": ""}`} onClick={() => userData?.about === "" && navigate("/setting")} >{userData?.about !== "" ? userData.fullName : "Write your bio"}</p>
                 <ul className={`d-flex justify-content-start align-items-center mt-3 ${ProfileStyle.profileIcons}`}>
-                    <li className="me-3 bgColorTopToBottom pointer" onClick={() => handleFacebook("facebook")}><FiFacebook /></li>
-                    <li className="me-3 bgColorTopToBottom pointer" onClick={() => handleFacebook("twitter")}><BsTwitter/></li>
-                    <li className="me-3 bgColorTopToBottom pointer" onClick={() => handleFacebook("linkedin")}><FiLinkedin/></li>
-                    <li className="me-3 bgColorTopToBottom pointer" onClick={() => handleFacebook("instagram")}><FiInstagram/></li>
+                    <li className={`me-3 bgColorTopToBottom pointer ${ProfileStyle.mute}`} onClick={() => handleFacebook("facebook")}><FiFacebook className={`${userData?.facebook === "" ? "" : ProfileStyle.activeFacebook}`} /></li>
+                    <li className="me-3 bgColorTopToBottom pointer" onClick={() => handleFacebook("twitter")}><BsTwitter className={`${userData?.twitter === "" ? "" : ProfileStyle.activeTwitter}`}/></li>
+                    <li className="me-3 bgColorTopToBottom pointer" onClick={() => handleFacebook("linkedin")}><FiLinkedin className={`${userData?.linkedin === "" ? "" : ProfileStyle.activeLinkedin}`}/></li>
+                    <li className="me-3 bgColorTopToBottom pointer" onClick={() => handleFacebook("instagram")}><FiInstagram className={`${userData?.instagram === "" ? "" : ProfileStyle.activeInstagram}`}/></li>
                 </ul>
             </div>
         </>

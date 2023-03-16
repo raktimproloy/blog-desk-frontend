@@ -62,3 +62,15 @@
     padding: 2% 5%;
     outline: 2px solid #fe4f70;
 }
+.activeFacebook{
+    color: #3b5998;
+}
+.activeTwitter{
+    color: #00acee;
+}
+.activeLinkedin{
+    color: #0A66C2;
+}
+.activeInstagram{
+    color: rgb(204, 0, 204);
+}
