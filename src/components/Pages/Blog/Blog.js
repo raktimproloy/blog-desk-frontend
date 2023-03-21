@@ -157,32 +157,34 @@ function Blog (){
             })
     }
 
-    const clickLike = () => {
-        if(AuthVerification().isExp){
-            const userId = {
-                clickFor: isLiked ? "dislike": "like",
-                id: AuthVerification().userId
-            } 
-            axios.post(`${databaseApi}/blog/like/${blogId}`, userId)
-                .then(res => {
-                    console.log(res);
-                    setIsLiked(!isLiked)
-                    console.log("Why click",userId.clickFor);
-                    
-                    if(userId.clickFor === "dislike"){
-                        setCountLike(countLike - 1)
-                        ratingCount("dislike")
-                    }else{
-                        setCountLike(countLike + 1) 
-                        ratingCount("like")
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-            
-        }else{
-            navigate("/login")
+    const clickLike = (e) => {
+        if(e.detail <= 1){
+            if(AuthVerification().isExp){
+                const userId = {
+                    clickFor: isLiked ? "dislike": "like",
+                    id: AuthVerification().userId
+                } 
+                axios.post(`${databaseApi}/blog/like/${blogId}`, userId)
+                    .then(res => {
+                        console.log(res);
+                        setIsLiked(!isLiked)
+                        console.log("Why click",userId.clickFor);
+                        
+                        if(userId.clickFor === "dislike"){
+                            setCountLike(countLike - 1)
+                            ratingCount("dislike")
+                        }else{
+                            setCountLike(countLike + 1) 
+                            ratingCount("like")
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                
+            }else{
+                navigate("/login")
+            }
         }
     }
 
@@ -230,16 +232,16 @@ function Blog (){
                         <h1 className={MainBlogStyle.title}>{blogData.title}</h1>
                         <div>
                             {
-                                blogData.theme === "themeOne" && <ThemeOne blogData={blogData}/>
+                                blogData.theme === "1" && <ThemeOne blogData={blogData}/>
                             }
                             {
-                                blogData.theme === "themeTwo" && <ThemeTwo blogData={blogData}/>
+                                blogData.theme === "2" && <ThemeTwo blogData={blogData}/>
                             }
                             {
-                                blogData.theme === "themeThree" && <ThemeThree blogData={blogData}/>
+                                blogData.theme === "3" && <ThemeThree blogData={blogData}/>
                             }
                             {
-                                blogData.theme === "themeFour" && <ThemeFour blogData={blogData}/>
+                                blogData.theme === "4" && <ThemeFour blogData={blogData}/>
                             }
                         </div>
                         <div className="text-center py-3">

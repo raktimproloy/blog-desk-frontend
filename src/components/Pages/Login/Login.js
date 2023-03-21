@@ -9,6 +9,8 @@ import {useCookies} from "react-cookie"
 function Login () {
     const navigate = useNavigate();
     const location = useLocation()
+    const from = location?.state?.from
+    
     const {databaseApi} = useContext(ContextApi)
     const [loginResponse, setLoginResponse] = useState({})
     const [userLoginData, setUserLoginData] = useState({
@@ -42,7 +44,7 @@ function Login () {
             setLoading(false)
             setCookies("blogDeskToken", loginResponse.token)
             // localStorage.setItem("blogDeskToken", loginResponse.token)
-            navigate("/")
+            navigate(from ? from : "/")
         }else{
             setLoading(false)
         }

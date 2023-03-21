@@ -5,6 +5,7 @@ import Footer from '../../Sections/Footer/Footer';
 import BlogStyleThree from '../../Sections/BlogStyle/BlogStyleThree/BlogStyleThree';
 import About from '../../Sections/About/About';
 import ContextApi from "../../../ContextApi/ContextApi";
+import SeeMore from '../../Sections/SeeMore/SeeMore';
 import axios from 'axios';
 
 export const Popular = () => {
@@ -14,7 +15,7 @@ export const Popular = () => {
     }
     const {databaseApi} = useContext(ContextApi)
     const [allBlogs, setAllBlogs] = useState([])
-    const [showCardNum, setShowCardNum] = useState(10)
+    const [showSeeMoreCount, setShowSeeMoreCount] = useState(10)
 
     useEffect(() => {
         axios.get(`${databaseApi}/blog/blogs/all`)
@@ -28,10 +29,6 @@ export const Popular = () => {
             })
     }, [])
 
-    const handleSeeMore = () => {
-        setShowCardNum(showCardNum + 10)
-    }
-
   return (
     <>
         <Navbar/>
@@ -41,16 +38,12 @@ export const Popular = () => {
                 <div className={`leftSectionContainer`}>
                     <div>
                         <div>
-                            {allBlogs.slice(0, showCardNum).map(blog => 
+                            {allBlogs.slice(0, showSeeMoreCount).map(blog => 
                                 <BlogStyleThree blogData={blog} key={blog._id}/>
                             )}
                         </div>
                     </div>
-                    <div onClick={handleSeeMore} className="bgColorLeftToRight" >
-                        <div>
-                            See More
-                        </div>
-                    </div>
+                    {allBlogs.length > showSeeMoreCount && <SeeMore showSeeMoreCount={showSeeMoreCount} setShowSeeMoreCount={setShowSeeMoreCount} />}
                 </div>
                 {/* Right Side */}
                 <div className={`rightSectionContainer`}>

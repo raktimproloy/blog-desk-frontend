@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import settingStyle from "../style.module.css"
-import {FaFacebookF} from 'react-icons/fa';
-import {AiOutlineTwitter} from 'react-icons/ai';
+import { BsTwitter } from 'react-icons/bs';
+import { FiFacebook, FiLinkedin, FiInstagram} from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';
 import ContextApi from "../../../../ContextApi/ContextApi";
 import axios from "axios"
@@ -56,11 +56,19 @@ const UserSetting = ({updateProfile, setUpdateProfile, setPopup}) => {
                 </div>
                 <p>Social Profile</p>
                 <div className={`d-flex align-items-center`}>
-                    <p className={`${settingStyle.linkInputIcon}`}><FaFacebookF/></p>
+                    <p className={`${settingStyle.linkInputIcon}`}><FiFacebook/></p>
                     <input type="text" className={`inputStyle ${settingStyle.linkInputField}`}value={updateProfile?.facebook || ""} onChange={(e) => setUpdateProfile({...updateProfile, facebook: e.target.value})} />
                 </div>
                 <div className={`d-flex align-items-center`}>
-                    <p className={`${settingStyle.linkInputIcon}`}><AiOutlineTwitter/></p>
+                    <p className={`${settingStyle.linkInputIcon}`}><BsTwitter/></p>
+                    <input type="text" className={`inputStyle ${settingStyle.linkInputField}`}value={updateProfile?.twitter || ""} onChange={(e) => setUpdateProfile({...updateProfile, twitter : e.target.value})} />
+                </div>
+                <div className={`d-flex align-items-center`}>
+                    <p className={`${settingStyle.linkInputIcon}`}><FiLinkedin/></p>
+                    <input type="text" className={`inputStyle ${settingStyle.linkInputField}`}value={updateProfile?.twitter || ""} onChange={(e) => setUpdateProfile({...updateProfile, twitter : e.target.value})} />
+                </div>
+                <div className={`d-flex align-items-center`}>
+                    <p className={`${settingStyle.linkInputIcon}`}><FiInstagram/></p>
                     <input type="text" className={`inputStyle ${settingStyle.linkInputField}`}value={updateProfile?.twitter || ""} onChange={(e) => setUpdateProfile({...updateProfile, twitter : e.target.value})} />
                 </div>
             </form>

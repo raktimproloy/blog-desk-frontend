@@ -31,12 +31,6 @@ function Navbar () {
           window.removeEventListener('scroll', stickNavbar);
         };
       }, []);
-
-      useEffect(() => {
-        setTimeout(() => {
-            console.log("Calling");
-        }, 3000);
-      }, [])
     
       const stickNavbar = () => {
         if (window !== undefined) {
@@ -85,15 +79,16 @@ function Navbar () {
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=standard"}>Standard</Link></Dropdown.Item>
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=common"}>Common</Link></Dropdown.Item>
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=treading"}>Treading</Link></Dropdown.Item>
-                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item>
+                                        {/* <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item> */}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
                             <li className={`nav-item mx-2 d-flex align-items-center`}>
                                 <Link className={`nav-link fw-bold text-dark ${location.pathname === "/popular" && ""} bgColorLeftToRight`} to={"/popular"}>Popular</Link>
                             </li>
+                            {/* to={isExp ? "/post" : "/login"} */}
                             <li className={`nav-item mx-2 d-flex align-items-center`}>
-                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/post" && ""} bgColorLeftToRight`} to={isExp ? "/post" : "/login"}>Post</Link>
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/post" && ""} bgColorLeftToRight`} to={"/post"} >Post</Link>
                             </li>
                             
                         </ul>
@@ -139,7 +134,7 @@ function Navbar () {
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=standard"}>Standard</Link></Dropdown.Item>
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=common"}>Common</Link></Dropdown.Item>
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=treading"}>Treading</Link></Dropdown.Item>
-                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item>
+                                        {/* <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item> */}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
@@ -147,7 +142,7 @@ function Navbar () {
                                 <Link className={`nav-link fw-bold text-dark ${location.pathname === "/popular" && ""} bgColorLeftToRight`} to={"/popular"}>Popular</Link>
                             </li>
                             <li className={`nav-item mx-2 d-flex align-items-center`}>
-                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/post" && ""} bgColorLeftToRight`} to={isExp ? "/post" : "/login"}>Post</Link>
+                                <Link className={`nav-link fw-bold text-dark ${location.pathname === "/post" && ""} bgColorLeftToRight`} to={"/post"}>Post</Link>
                             </li>
                             
                         </ul>
@@ -186,11 +181,11 @@ function Navbar () {
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=standard"}>Standard</Link></Dropdown.Item>
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=common"}>Common</Link></Dropdown.Item>
                                         <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=treading"}>Treading</Link></Dropdown.Item>
-                                        <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item>
+                                        {/* <Dropdown.Item className={`${NavbarStyle.dropdownItem}`}><Link className={`${NavbarStyle.dropdownItemText}`} to={"/category?c=inspiration"}>Inspiration</Link></Dropdown.Item> */}
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </li>
-                            <li><Link to={"/category"}>Popular</Link></li>
+                            <li><Link to={"/popular"}>Popular</Link></li>
                             <li><Link to={"/post"}>Post</Link></li>
                             { 
                                     AuthVerification().isExp ? 

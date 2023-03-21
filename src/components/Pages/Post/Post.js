@@ -26,10 +26,8 @@ function Post () {
     }
     const navigate = useNavigate()
     const {databaseApi} = useContext(ContextApi)
-    const [category, setCategory] = useState("None")
+    const [category, setCategory] = useState("Standard")
     const [userData, setUserData] = useState({})
-    const [postResponse, setPostResponse] = useState({})
-    const [selectTheme, setSelectTheme] = useState("themeOne")
     const {isExp, userId, fullName, email} = AuthVerification();
     const [themeOnePostItem, setThemeOnePostItem] = useState({
         BlogImageOne: "",
@@ -41,7 +39,7 @@ function Post () {
         thirdDescription: "",
     })
     const [blogItem, setBlogItem] = useState({
-        theme: "themeOne",
+        theme: "1",
         title: ""
     })
 
@@ -74,12 +72,12 @@ function Post () {
         e.preventDefault()
         
         const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-        ];
+        "July", "August", "September", "October", "November", "December"];
         const date = new Date()
         
         const postedTime = `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
-        if(userData[0].isVerified){
+        console.log(userData[0]);
+        if(userData[0]?.isVerified){
             const formData = new FormData()
             formData.append("userId", userId)
             formData.append("theme", blogItem.theme)
@@ -117,9 +115,10 @@ function Post () {
                     setAlert(true)
                 })
         }else{
+            console.log(userData);
             setPrint({
                 topic: false,
-                text: "You are not verified!"
+                text: "You are not verified! Go to setting"
             }) 
             setAlert(true)
         }
@@ -146,19 +145,19 @@ function Post () {
                             <div className="py-3">
                                 <h5>Select Your Theme</h5>
                                 <div className="row gx-5 gy-3">
-                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeOne" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeOne" })} >
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "1" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "1" })} >
                                         <img src={ThemeOneImage} alt="Theme One" />
                                         <p>Theme One</p>
                                     </div>
-                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeTwo" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeTwo" })} >
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "2" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "2" })} >
                                         <img src={ThemeTwoImage} alt="Theme Two" />
                                         <p>Theme Two</p>
                                     </div>
-                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeThree" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeThree" })} >
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "3" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "3" })} >
                                         <img src={ThemeThreeImage} alt="Theme Three" />
                                         <p>Theme Three</p>
                                     </div>
-                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "themeFour" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "themeFour" })} >
+                                    <div className={`col-xl-3 col-md-6 text-center defaultBorder ${postStyle.themeContainer} ${blogItem.theme === "4" ? postStyle.selectTheme : ""}`} onClick={() => setBlogItem({...blogItem, theme: "4" })} >
                                         <img src={ThemeFourImage} alt="Theme Four" />
                                         <p>Theme Four</p>
                                     </div>
@@ -181,10 +180,10 @@ function Post () {
                                 </ul>
                             </div>
                             <div>
-                                {blogItem.theme === "themeOne" && <ThemeInputsOne themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
-                                {blogItem.theme === "themeTwo" && <ThemeInputsTwo themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
-                                {blogItem.theme === "themeThree" && <ThemeInputsThree themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
-                                {blogItem.theme === "themeFour" && <ThemeInputsFour themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
+                                {blogItem.theme === "1" && <ThemeInputsOne themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
+                                {blogItem.theme === "2" && <ThemeInputsTwo themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
+                                {blogItem.theme === "3" && <ThemeInputsThree themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
+                                {blogItem.theme === "4" && <ThemeInputsFour themeOnePostItem={themeOnePostItem} setThemeOnePostItem={setThemeOnePostItem}/>}
                             </div>
                             <div className="text-center mt-3">
                                 <input className="bgColorLeftToRight py-3" type="submit" value="Post Blog" />

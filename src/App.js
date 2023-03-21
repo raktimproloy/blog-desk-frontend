@@ -11,12 +11,25 @@ import Author from "./components/Pages/Author/Author";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./common/css/style.css"
 import {
-  Route, Routes
+  Route, Routes, useNavigate
 } from "react-router-dom";
 
 import ProtectedRoutes from "./Protected/ProtectedRoutes"
+import { useEffect } from "react";
+import AuthVerification from "./commonFunc/AuthVerification";
 
 function App() {
+  const navigate = useNavigate()
+  const {isExp, userId, fullName, email} = AuthVerification();
+  useEffect(() => {
+    console.log("Start setTimeout for logout");
+    if(isExp){
+      setTimeout(() => {
+        console.log("Time to logout");
+        navigate("/login")
+      }, 3600000);
+    }
+  }, [isExp])
   return (
     <div className="App">
       <Routes>
