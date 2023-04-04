@@ -7,6 +7,7 @@ import Loading from "../../Sections/Loading/Loading";
 import {useCookies} from "react-cookie"
 
 function Login () {
+    console.log("Login");
     const navigate = useNavigate();
     const location = useLocation()
     const from = location?.state?.from
