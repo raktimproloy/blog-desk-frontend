@@ -23,28 +23,13 @@ function Home() {
     }
     const {databaseApi} = useContext(ContextApi)
 
-    // useEffect(() => {
-    //     axios.get(`${databaseApi}/blog/blogs/all`)
-    //         .then(res => {
-    //             setAllBlogs(res.data.reverse())
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }, [])
-
     useEffect(() => {
-        axios.get(`https://www.instagram.com/graphql/query/?query_hash=d4d88dc1500312af6f937f7b804c68c3&user_id=49024230706&include_chaining=false&include_reel=false&include_suggested_users=false&include_logged_out_extras=false&include_live_status=false&include_highlight_reels=true`,{ headers: {
-            Referer: 'https://www.instagram.com/',
-            'User-Agent':
-              'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36',
-            'X-Requested-With': 'XMLHttpRequest',
-          }})
+        axios.get(`${databaseApi}/blog/blogs/all`)
             .then(res => {
-                console.log("Res",res);
+                setAllBlogs(res.data.reverse())
             })
             .catch(err => {
-                console.log("Error",err);
+                console.log(err);
             })
     }, [])
 
