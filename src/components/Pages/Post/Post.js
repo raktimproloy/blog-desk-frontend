@@ -76,7 +76,6 @@ function Post () {
         const date = new Date()
         
         const postedTime = `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
-        console.log(userData[0]);
         if(userData[0]?.isVerified){
             const formData = new FormData()
             formData.append("userId", userId)
@@ -115,7 +114,6 @@ function Post () {
                     setAlert(true)
                 })
         }else{
-            console.log(userData);
             setPrint({
                 topic: false,
                 text: "You are not verified! Go to setting"

@@ -9,7 +9,7 @@ function ThemeInputsOne ({themeOnePostItem, setThemeOnePostItem}) {
             <div className="py-3">
                 <div>
                     <p>First Image</p>
-                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageOne" onChange={photoChange} onClick={(e) => console.log(e.target.files[0])} />
+                    <input type="file" placeholder="Upload first image" className="fileStyle" name="BlogImageOne" onChange={photoChange} />
                 </div>
                 <div>
                     <p>First Description:</p>

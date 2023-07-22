@@ -22,10 +22,8 @@ function App() {
   const navigate = useNavigate()
   const {isExp, userId, fullName, email} = AuthVerification();
   useEffect(() => {
-    console.log("Start setTimeout for logout");
     if(isExp){
       setTimeout(() => {
-        console.log("Time to logout");
         navigate("/login")
       }, 3600000);
     }

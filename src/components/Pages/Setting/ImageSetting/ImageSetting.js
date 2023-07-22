@@ -5,7 +5,6 @@ const ImageSetting = ({databaseApi, updateProfile, setUpdateProfile, presentImag
   const handlePhoto = (e) => {
     setUpdateProfile({...updateProfile, profileImage: e.target.files[0]})
   }
-  console.log("data",updateProfile);
   return (
     <>
       <div className='text-center'>

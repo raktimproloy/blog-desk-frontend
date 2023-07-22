@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
 
 function Author() {
-    console.log("Author");
     const pageHeadingDetails = {
         title: "Home",
         des: "Home Can Help You To Decide Your Reading Blog"
@@ -33,7 +32,6 @@ function Author() {
 
         axios.get(`${databaseApi}/blog/author/${userId}`)
             .then(res => {
-                console.log(res);
                 setUserData(res.data[0]);
                 setUserBlog(res.data[0].blogs.reverse())
             })
@@ -49,12 +47,9 @@ function Author() {
     const deleteBlog = () => {
         axios.delete(`${databaseApi}/blog/delete/${deletedBlog}`)
             .then(res => {
-                console.log("Success");
-                console.log(res);
                 setDeletedSuccessful(!deletedSuccessful)
                 })
                 .catch(err => {
-                    console.log("error");
                     console.log(err);
                 })
     }

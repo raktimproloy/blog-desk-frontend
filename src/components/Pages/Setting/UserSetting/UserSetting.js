@@ -23,11 +23,8 @@ const UserSetting = ({updateProfile, setUpdateProfile, setPopup}) => {
 
         axios.put(`${databaseApi}/users/verify/${userId}`, send)
         .then(res => {
-            console.log(res.data.message);
             if(res.data.message === "Email sent successful"){
-                console.log("OK");
             }else{
-                console.log("No");
             }
         })
         .catch(err => {

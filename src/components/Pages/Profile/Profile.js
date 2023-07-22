@@ -11,7 +11,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Cookies } from "react-cookie";
 
 function Profile() {
-    console.log("Profile");
     const pageHeadingDetails = {
         title: "Profile",
         des: "You are the king and this is your kingdom"
@@ -29,7 +28,6 @@ function Profile() {
     useEffect(() => {
         axios.get(`${databaseApi}/users/profile`, {headers: {"Authorization": `Bearer ${token}`}})
             .then(res => {
-                console.log(res);
                 setUserData(res.data[0]);
                 setUserBlog(res.data[0].blogs.reverse())
             })
@@ -45,12 +43,9 @@ function Profile() {
     const deleteBlog = () => {
         axios.delete(`${databaseApi}/blog/delete/${deletedBlog}`)
             .then(res => {
-                console.log("Success");
-                console.log(res);
                 setDeletedSuccessful(!deletedSuccessful)
             })
             .catch(err => {
-                console.log("error");
                 console.log(err);
             })
     }

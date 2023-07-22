@@ -39,7 +39,6 @@ const Setting = () => {
     const loadingMessage = "updating your profile..."
     
     const userId = AuthVerification().userId
-    console.log(AuthVerification().userId);
     useEffect(() => {
         const token = new Cookies().get("blogDeskToken")
         axios.get(`${databaseApi}/users/profile`, {headers: {"Authorization": `Bearer ${token}`}})
@@ -57,7 +56,6 @@ const Setting = () => {
     const handlePassword = (e) => {
         e.preventDefault()
         setLoading(true)
-        console.log("password",updateProfile);
         
         const formData = new FormData()
 
@@ -72,7 +70,6 @@ const Setting = () => {
 
         axios.put(`${databaseApi}/users/update/${userId}`, formData)
         .then(res => {
-            console.log(res);
             setLoading(false)
             setUpdated("updated")
             setPopupPassword(false)
@@ -86,7 +83,6 @@ const Setting = () => {
             setLoading(false)
             setPopupPassword(false)
             setUpdatedError(err.response.data.error)
-            console.log(err.response.data.error);
             if(err.response.data.error === "Wrong Link"){
                 setPrint({
                     topic: false,
@@ -107,7 +103,6 @@ const Setting = () => {
     const handleUpdate = () => {
         setPopupPassword(true)
         setUpdateProfile({...updateProfile, password: ""})
-        console.log("setting",updateProfile);
     }
 
     const handleOtpSubmit = (e) => {
@@ -118,11 +113,9 @@ const Setting = () => {
         .then(res => {
             setCheckOtp(true)
             setPopup(false)
-            console.log("Success", res);
             setRender(!render)
         })
         .catch(err => {
-            console.log("Error",err);
             setCheckOtp(false)
         })
     }

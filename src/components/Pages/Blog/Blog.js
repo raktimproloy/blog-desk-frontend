@@ -49,7 +49,6 @@ function Blog (){
 
     useEffect(() => {
         const userId = blogData.author
-        console.log(userId === undefined);
         if(userId !== undefined){
             getUserData(userId)
             setCountLike(blogData.likes.length)
@@ -115,17 +114,13 @@ function Blog (){
                     const previousViews = {
                         views: blogData.views + 1
                     }
-                    console.log("Ai re sala");
                     axios.put(`${databaseApi}/blog/views/${blogId}`, previousViews)
                         .then(res => {
-                            console.log(res);
                         })
                         .catch(err => {
-                            console.log(err);
                         })
                     ratingCount("view")
                 }else{
-                    console.log("Acha");
                 }
             }else{
                 
@@ -134,13 +129,10 @@ function Blog (){
                 const previousViews = {
                     views: blogData.views + 1
                 }
-                console.log("Ai re sala");
                 axios.put(`${databaseApi}/blog/views/${blogId}`, previousViews)
                     .then(res => {
-                        console.log(res);
                     })
                     .catch(err => {
-                        console.log(err);
                     })
                 ratingCount("view")
             }
@@ -166,9 +158,7 @@ function Blog (){
                 } 
                 axios.post(`${databaseApi}/blog/like/${blogId}`, userId)
                     .then(res => {
-                        console.log(res);
                         setIsLiked(!isLiked)
-                        console.log("Why click",userId.clickFor);
                         
                         if(userId.clickFor === "dislike"){
                             setCountLike(countLike - 1)
@@ -202,7 +192,6 @@ function Blog (){
                 } 
                 axios.post(`${databaseApi}/blog/comment/${blogId}`, commentData)
                     .then(res => {
-                        console.log(res);
                         setCount(count+ 1)
                         setComment("")
                         ratingCount("comment")
@@ -211,14 +200,12 @@ function Blog (){
                         console.log(err);
                     })
             }else{
-                console.log("Empty Comment");
             }
         }else{
             navigate("/login")
         }
     }
     const clickProfile = () => {
-        console.log(blogData.author);
         navigate(`/author?userId=${blogData.author}`)
 }
 

@@ -12,7 +12,6 @@ import ContextApi from "../../../ContextApi/ContextApi";
 import HomeStyle from "./style.module.css"
 
 function Home() {
-    console.log("Home");
     const [allBlogs, setAllBlogs] = useState([])
     const [standardBlog, setStandardBlog] = useState([])
     const [commonBlog, setCommonBlog] = useState([])

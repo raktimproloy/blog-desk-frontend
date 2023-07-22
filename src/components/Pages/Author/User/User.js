@@ -15,7 +15,6 @@ const User = ({userData}) => {
     
     return(
         <>
-        {console.log("User Data",userData)}
             <div className={`d-flex justify-content-center align-items-center mb-4 ${ProfileStyle.profileNameImage}`} >
                 {/* <img src={`${databaseApi}/${userData?.profileImage}`} alt="portfolio" className={ProfileStyle.profileImage} /> */}
                 <img src={`${userData?.profileImage}`} alt="portfolio" className={ProfileStyle.profileImage} />

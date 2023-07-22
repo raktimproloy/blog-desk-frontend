@@ -7,7 +7,6 @@ const useAuth = () => {
     if(AuthVerification().isExp){
         user.loggedIn = true
     }
-    console.log(user);
     return user && user.loggedIn
 }
 
@@ -18,7 +17,6 @@ const handleLocation = () => {
 
 const ProtectedRoutes = () => {
     const location = handleLocation()
-    console.log(location);
     const isAuth = useAuth()
     return isAuth ? <Outlet/> : <Navigate to="/login" state={{from: location.pathname}} />
 }
