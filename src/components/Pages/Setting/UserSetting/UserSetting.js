@@ -5,6 +5,7 @@ import { FiFacebook, FiLinkedin, FiInstagram} from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';
 import ContextApi from "../../../../ContextApi/ContextApi";
 import axios from "axios"
+import AuthVerification from '../../../../commonFunc/AuthVerification';
 
 const UserSetting = ({updateProfile, setUpdateProfile, setPopup}) => {
     const [userData, setUserData] = useState([])
@@ -13,11 +14,11 @@ const UserSetting = ({updateProfile, setUpdateProfile, setPopup}) => {
     
     const {search} = useLocation()
     const queryParams = new URLSearchParams(search)
-    const userId = queryParams.get("userId")
+    const userId = AuthVerification().userId
 
     const handleVerify = (e) => {
         e.preventDefault()
-
+        console.log(userId)
         const send = {"forClick": "send", "email": updateProfile.email}
         setPopup(true)
 
